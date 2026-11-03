@@ -1,0 +1,110 @@
+{
+  "case": {
+    "id": "solid_mechanics_4",
+    "title": "问题 4",
+    "category": "固体力学",
+    "solver": "foamRun",
+    "standard_case_path": "openfoam_cases/solid_mechanics/solid_mechanics_4",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "6000"
+    ],
+    "fields": [
+      "D"
+    ],
+    "metrics": [
+      "scalar MAE",
+      "scalar RMSE",
+      "relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/solid_mechanics/solid_mechanics_4/prompt.md",
+    "notes": "Supplied OpenFOAM 13 solid_mechanics/beamEndLoad prototype; D scored."
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/solid_mechanics/solid_mechanics_4/qwen3p8flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/solid_mechanics/solid_mechanics_4/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 6000.0,
+      "field": "D",
+      "metrics": {
+        "cells": 6,
+        "components": 1,
+        "mae": 0.0004470261666666667,
+        "rmse": 0.0005183399500657525,
+        "max_abs": 0.0007389200000000001,
+        "relative_l2": 0.19055335624789996,
+        "bias": -0.0004470261666666667,
+        "centered_rmse": 0.00026238123055865155,
+        "centered_relative_l2": 0.15293718130937334,
+        "prediction_l2": 0.0054717472930898405,
+        "reference_l2": 0.006663059711785045
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 0.0004470261666666667,
+    "rmse": 0.0005183399500657525,
+    "max_abs": 0.0007389200000000001,
+    "relative_l2": 0.19055335624789996,
+    "centered_rmse": 0.00026238123055865155,
+    "centered_relative_l2": 0.15293718130937334
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/solid_mechanics/solid_mechanics_4",
+    "started_at_utc": "2026-11-01T09:39:41.996360+00:00",
+    "finished_at_utc": "2026-11-01T09:39:49.317968+00:00",
+    "generation_elapsed_seconds": 7.3216189710001345,
+    "token_usage": {
+      "input_tokens": 3449,
+      "output_tokens": 363,
+      "total_tokens": 3812,
+      "provider_usage": {
+        "prompt_tokens": 3449,
+        "total_tokens": 3812,
+        "completion_tokens": 363,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 3449
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

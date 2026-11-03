@@ -1,0 +1,111 @@
+{
+  "case": {
+    "id": "nonlinear_heat_10",
+    "title": "问题 10",
+    "category": "二维非线性瞬态导热",
+    "solver": "solid",
+    "standard_case_path": "openfoam_cases/nonlinear_heat/nonlinear_heat_10",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "50",
+      "150",
+      "300",
+      "600",
+      "1000"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/nonlinear_heat/nonlinear_heat_10/prompt.md",
+    "notes": "模型输入包含 blockMeshDict、求解配置、材料模型和 0/T；不包含派生 polyMesh、目标时间场、postProcessing 或 reference_answer.json。标准答案来自 OpenFOAM 13 polynomialSolid 数值解。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/nonlinear_heat/nonlinear_heat_10/qwen3p8flash_thinking/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/nonlinear_heat/nonlinear_heat_10/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": false,
+  "schema_errors": [
+    "case_id mismatch",
+    "points length mismatch",
+    "temperature_by_time length mismatch"
+  ],
+  "field_results": [],
+  "aggregate": {},
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash_thinking.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash_thinking"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash_thinking",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/nonlinear_heat/nonlinear_heat_10",
+    "started_at_utc": "2026-10-31T13:07:28.359608+00:00",
+    "finished_at_utc": "2026-10-31T13:13:39.101739+00:00",
+    "generation_elapsed_seconds": 370.74214628499976,
+    "token_usage": {
+      "input_tokens": 6092,
+      "output_tokens": 44317,
+      "total_tokens": 50409,
+      "provider_usage": {
+        "input_tokens": 6092,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 44317,
+        "output_tokens_details": {
+          "reasoning_tokens": 43372
+        },
+        "total_tokens": 50409,
+        "x_details": [
+          {
+            "input_tokens": 6092,
+            "output_tokens": 44317,
+            "total_tokens": 50409,
+            "output_tokens_details": {
+              "reasoning_tokens": 43372
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "x_billing_type": "response_api"
+          }
+        ]
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

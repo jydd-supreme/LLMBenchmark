@@ -1,0 +1,272 @@
+{
+  "case": {
+    "id": "heat_conduction_1",
+    "title": "问题 1",
+    "category": "一维传热/扩散",
+    "solver": null,
+    "standard_case_path": null,
+    "difficulty": "入门",
+    "input_times": [],
+    "target_times": [
+      "0.3",
+      "0.4",
+      "0.5",
+      "0.6"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/heat_conduction/heat_conduction_1/prompt.md",
+    "notes": "直接根据题目给定的热方程、初始条件和边界条件计算指定坐标与时刻的温度；标准答案由 Fourier 级数解析生成器产生，不依赖 OpenFOAM 网格或时间离散。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/heat_conduction/heat_conduction_1/gpt5p6sol/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/heat_conduction/heat_conduction_1/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 0.3,
+      "field": "T",
+      "metrics": {
+        "cells": 11,
+        "components": 1,
+        "mae": 5.416279448540577e-05,
+        "rmse": 0.00013766705317846834,
+        "max_abs": 0.00045086316640663426,
+        "relative_l2": 4.068888431937104e-07,
+        "bias": 3.403168165050374e-05,
+        "centered_rmse": 0.00013339438582227778,
+        "centered_relative_l2": 1.4382133772131872e-06,
+        "prediction_l2": 1122.149222033366,
+        "reference_l2": 1122.149129976295
+      }
+    },
+    {
+      "time": 0.4,
+      "field": "T",
+      "metrics": {
+        "cells": 11,
+        "components": 1,
+        "mae": 1.923765776981864e-08,
+        "rmse": 2.868070140429139e-08,
+        "max_abs": 6.440785682571004e-08,
+        "relative_l2": 8.33095717206716e-11,
+        "bias": 1.864043497334933e-08,
+        "centered_rmse": 2.1797152423800897e-08,
+        "centered_relative_l2": 2.3087363069333818e-10,
+        "prediction_l2": 1141.803076440933,
+        "reference_l2": 1141.8030763762872
+      }
+    },
+    {
+      "time": 0.5,
+      "field": "T",
+      "metrics": {
+        "cells": 11,
+        "components": 1,
+        "mae": 7.879954139608262e-05,
+        "rmse": 0.00013819696061020015,
+        "max_abs": 0.00039559732942962,
+        "relative_l2": 3.954689337840886e-07,
+        "bias": -4.2500679001022945e-05,
+        "centered_rmse": 0.0001314994000378043,
+        "centered_relative_l2": 1.374905036457302e-06,
+        "prediction_l2": 1158.9972860326454,
+        "reference_l2": 1158.9973986725322
+      }
+    },
+    {
+      "time": 0.6,
+      "field": "T",
+      "metrics": {
+        "cells": 11,
+        "components": 1,
+        "mae": 0.00014955034584896896,
+        "rmse": 0.00024161904150582617,
+        "max_abs": 0.0005902730898696973,
+        "relative_l2": 6.823511065503194e-07,
+        "bias": 0.00010898009003312836,
+        "centered_rmse": 0.00021564577710519195,
+        "centered_relative_l2": 2.233386962837722e-06,
+        "prediction_l2": 1174.409904271301,
+        "reference_l2": 1174.4096187246935
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 7.063297984705679e-05,
+    "rmse": 0.00012937793399897475,
+    "max_abs": 0.0003591994983906943,
+    "relative_l2": 3.7119804827495976e-07,
+    "centered_rmse": 0.00012014034002942446,
+    "centered_relative_l2": 1.261684062534726e-06
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/gpt5p6sol.json",
+    "model_name": "gpt-5.6-sol",
+    "model_alias": "gpt5p6sol"
+  },
+  "generation": {
+    "model_name": "gpt-5.6-sol",
+    "model_alias": "gpt5p6sol",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/heat_conduction/heat_conduction_1",
+    "started_at_utc": "2026-10-30T09:50:48.706120+00:00",
+    "finished_at_utc": "2026-10-30T09:52:14.405118+00:00",
+    "generation_elapsed_seconds": 85.69896324999996,
+    "token_usage": {
+      "input_tokens": 5228,
+      "output_tokens": 5863,
+      "total_tokens": 11091,
+      "provider_usage": {
+        "input_tokens": 5228,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 5863,
+        "output_tokens_details": {
+          "reasoning_tokens": 5476
+        },
+        "total_tokens": 11091,
+        "attribution": {
+          "items": {
+            "msg_09caf862517a94f4016ae468826dd481949ca25381d3e0820e": {
+              "input_tokens": 826,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0,
+              "content": [
+                {
+                  "input_tokens": 826,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                }
+              ]
+            },
+            "msg_09caf862517a94f4016ae468c727a481949f9ab92a27c6664f": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 387,
+              "content": [
+                {
+                  "input_tokens": 0,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 387
+                }
+              ]
+            },
+            "rs_09caf862517a94f4016ae46889dea48194a4ae68a271e74d9e": {
+              "input_tokens": 2,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 516
+            },
+            "rs_09caf862517a94f4016ae468914ba08194a9063b3f27dc08ea": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_09caf862517a94f4016ae4689814c881948e249fd732cb0454": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_09caf862517a94f4016ae4689f451c8194b7aecfc3636815af": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_09caf862517a94f4016ae468a69d088194a6562a045434dfc9": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_09caf862517a94f4016ae468ad0f5c81949309cfe2a6e3e046": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_09caf862517a94f4016ae468b324c081948669e00edb6c4b7e": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_09caf862517a94f4016ae468b92a508194b1448028b55f9b97": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_09caf862517a94f4016ae468beca0c8194a2dca14bc3d9d81e": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_09caf862517a94f4016ae468c40ee8819480a606ee650a88e5": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_09caf862517a94f4016ae468c71d7c819486301847fde85fef": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 298
+            }
+          },
+          "request_fields": {
+            "instructions": {
+              "input_tokens": 4400,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0
+            }
+          }
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

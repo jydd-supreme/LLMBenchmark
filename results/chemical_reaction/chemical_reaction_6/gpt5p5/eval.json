@@ -1,0 +1,231 @@
+{
+  "case": {
+    "id": "chemical_reaction_6",
+    "title": "问题 6",
+    "category": "化学反应",
+    "solver": "foamRun",
+    "standard_case_path": "openfoam_cases/chemical_reaction/chemical_reaction_6",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "1",
+      "2.5",
+      "5"
+    ],
+    "fields": [
+      "alpha.gas"
+    ],
+    "metrics": [
+      "scalar MAE",
+      "scalar RMSE",
+      "relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/chemical_reaction/chemical_reaction_6/prompt.md",
+    "notes": "OpenFOAM 13 bubbleColumnEvaporatingReacting prototype; only initial state varied; alpha.gas (气相体积分数, 1) scored."
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/chemical_reaction/chemical_reaction_6/gpt5p5/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/chemical_reaction/chemical_reaction_6/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 1.0,
+      "field": "alpha.gas",
+      "metrics": {
+        "cells": 9,
+        "components": 1,
+        "mae": 0.004553720927777778,
+        "rmse": 0.005617763150882537,
+        "max_abs": 0.007799325060000001,
+        "relative_l2": 0.009709115803805143,
+        "bias": 0.0005484176477777991,
+        "centered_rmse": 0.005590930235928512,
+        "centered_relative_l2": 0.012440851442226024,
+        "prediction_l2": 1.7360515545340236,
+        "reference_l2": 1.7358212419345707,
+        "boundedness_violation_fraction": 0.0,
+        "liquid_volume_abs_error": 0.004935758830000303,
+        "liquid_volume_relative_error": 0.0015047750492349248,
+        "interface_cell_count_error": 0
+      }
+    },
+    {
+      "time": 2.5,
+      "field": "alpha.gas",
+      "metrics": {
+        "cells": 9,
+        "components": 1,
+        "mae": 0.4080813388444444,
+        "rmse": 0.48482400213831356,
+        "max_abs": 0.8104357977,
+        "relative_l2": 1.5628968540761095,
+        "bias": 0.10166825306666666,
+        "centered_rmse": 0.4740441744898715,
+        "centered_relative_l2": 5.576015148697097,
+        "prediction_l2": 1.7499714283381886,
+        "reference_l2": 0.9306257176355615,
+        "boundedness_violation_fraction": 0.0,
+        "liquid_volume_abs_error": 0.9150142775999996,
+        "liquid_volume_relative_error": 0.3407892526080568,
+        "interface_cell_count_error": 3
+      }
+    },
+    {
+      "time": 5.0,
+      "field": "alpha.gas",
+      "metrics": {
+        "cells": 9,
+        "components": 1,
+        "mae": 0.2846776123,
+        "rmse": 0.37332059680428703,
+        "max_abs": 0.6075411303,
+        "relative_l2": 1.0789615481896868,
+        "bias": 0.1179561106999999,
+        "centered_rmse": 0.35419574241771795,
+        "centered_relative_l2": 3.641109045834239,
+        "prediction_l2": 1.7853571071357126,
+        "reference_l2": 1.037999725098606,
+        "boundedness_violation_fraction": 0.0,
+        "liquid_volume_abs_error": 1.0616049962999994,
+        "liquid_volume_relative_error": 0.35524252817502433,
+        "interface_cell_count_error": 3
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 0.23243755735740743,
+    "rmse": 0.2879207873644944,
+    "max_abs": 0.47525875102,
+    "relative_l2": 0.8838558393565338,
+    "centered_rmse": 0.277943615714506,
+    "centered_relative_l2": 3.076521681991187
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/gpt-5.5.json",
+    "model_name": "gpt-5.5",
+    "model_alias": "gpt5p5"
+  },
+  "generation": {
+    "model_name": "gpt-5.5",
+    "model_alias": "gpt5p5",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/chemical_reaction/chemical_reaction_6",
+    "started_at_utc": "2026-10-31T07:48:31.054621+00:00",
+    "finished_at_utc": "2026-10-31T07:48:56.348112+00:00",
+    "generation_elapsed_seconds": 25.29349435500012,
+    "token_usage": {
+      "input_tokens": 22895,
+      "output_tokens": 2370,
+      "total_tokens": 25265,
+      "provider_usage": {
+        "attribution": {
+          "items": {
+            "msg_059d118b34fd0513016ae59d509544819196f7f61cbe176404": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 24,
+                  "output_tokens": 0
+                }
+              ],
+              "input_tokens": 24,
+              "output_tokens": 0
+            },
+            "msg_059d118b34fd0513016ae59d5095488191897dc5da864207c8": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 22869,
+                  "output_tokens": 0
+                }
+              ],
+              "input_tokens": 22869,
+              "output_tokens": 0
+            },
+            "msg_059d118b34fd0513016ae59d629e68819195bdbb3fdfbf18e4": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 300
+                }
+              ],
+              "input_tokens": 0,
+              "output_tokens": 300
+            },
+            "rs_059d118b34fd0513016ae59d55ed78819184ac770a8e41c734": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 2,
+              "output_tokens": 516
+            },
+            "rs_059d118b34fd0513016ae59d5a20ac8191b18ec362007704e6": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_059d118b34fd0513016ae59d5e55388191a0d0a6561400c911": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_059d118b34fd0513016ae59d628f908191bfd22e4444a3a3ce": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            }
+          }
+        },
+        "input_tokens": 22895,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 2370,
+        "output_tokens_details": {
+          "reasoning_tokens": 2070
+        },
+        "total_tokens": 25265
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

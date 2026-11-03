@@ -1,0 +1,183 @@
+{
+  "case": {
+    "id": "nonlinear_heat_30",
+    "title": "问题 30",
+    "category": "二维非线性瞬态导热",
+    "solver": "solid",
+    "standard_case_path": "openfoam_cases/nonlinear_heat/nonlinear_heat_30",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "50",
+      "150",
+      "300",
+      "600",
+      "1000"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/nonlinear_heat/nonlinear_heat_30/prompt.md",
+    "notes": "模型输入包含 blockMeshDict、求解配置、材料模型和 0/T；不包含派生 polyMesh、目标时间场、postProcessing 或 reference_answer.json。标准答案来自 OpenFOAM 13 polynomialSolid 数值解。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/nonlinear_heat/nonlinear_heat_30/qwen3p8flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/nonlinear_heat/nonlinear_heat_30/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 50.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 48.51040184255,
+        "rmse": 71.257726180088,
+        "max_abs": 179.51940576599998,
+        "relative_l2": 0.17354566317051334,
+        "bias": 30.178567919849968,
+        "centered_rmse": 64.5516659635009,
+        "centered_relative_l2": 1.0919538682563408,
+        "prediction_l2": 2012.7344583734834,
+        "reference_l2": 1836.2558504753893
+      }
+    },
+    {
+      "time": 150.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 47.349418276049995,
+        "rmse": 56.329462654574805,
+        "max_abs": 107.285628949,
+        "relative_l2": 0.13038015264652095,
+        "bias": 13.094578700149896,
+        "centered_rmse": 54.78631555068031,
+        "centered_relative_l2": 0.6374574122112682,
+        "prediction_l2": 2012.7344583734834,
+        "reference_l2": 1932.1423556413674
+      }
+    },
+    {
+      "time": 300.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 49.916630123649995,
+        "rmse": 65.99641349067936,
+        "max_abs": 149.988223983,
+        "relative_l2": 0.14689616194663824,
+        "bias": 0.914098737850054,
+        "centered_rmse": 65.9900827180129,
+        "centered_relative_l2": 0.5996435759554168,
+        "prediction_l2": 2012.7344583734834,
+        "reference_l2": 2009.2079313814975
+      }
+    },
+    {
+      "time": 600.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 52.31015181389999,
+        "rmse": 79.32153621526801,
+        "max_abs": 184.12007921400004,
+        "relative_l2": 0.1718166892166164,
+        "bias": -7.546708526800046,
+        "centered_rmse": 78.96172045973668,
+        "centered_relative_l2": 0.625108614873176,
+        "prediction_l2": 2012.7344583734834,
+        "reference_l2": 2064.6230336033896
+      }
+    },
+    {
+      "time": 1000.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 52.821946102850006,
+        "rmse": 82.91154219566594,
+        "max_abs": 191.33858296200003,
+        "relative_l2": 0.17817094851121534,
+        "bias": -10.460669346750137,
+        "centered_rmse": 82.2490013682942,
+        "centered_relative_l2": 0.635034277276409,
+        "prediction_l2": 2012.7344583734834,
+        "reference_l2": 2081.1007183607276
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 50.181709631800004,
+    "rmse": 71.16333614725522,
+    "max_abs": 162.45038417480004,
+    "relative_l2": 0.16016192309830085,
+    "centered_rmse": 69.307757212045,
+    "centered_relative_l2": 0.7178395497145222
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/nonlinear_heat/nonlinear_heat_30",
+    "started_at_utc": "2026-10-31T08:25:16.774772+00:00",
+    "finished_at_utc": "2026-10-31T08:25:44.326246+00:00",
+    "generation_elapsed_seconds": 27.551505025000097,
+    "token_usage": {
+      "input_tokens": 7788,
+      "output_tokens": 2297,
+      "total_tokens": 10085,
+      "provider_usage": {
+        "prompt_tokens": 7788,
+        "total_tokens": 10085,
+        "completion_tokens": 2297,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 7788
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

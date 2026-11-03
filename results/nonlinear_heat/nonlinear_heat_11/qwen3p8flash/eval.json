@@ -1,0 +1,183 @@
+{
+  "case": {
+    "id": "nonlinear_heat_11",
+    "title": "问题 11",
+    "category": "二维非线性瞬态导热",
+    "solver": "solid",
+    "standard_case_path": "openfoam_cases/nonlinear_heat/nonlinear_heat_11",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "50",
+      "150",
+      "300",
+      "600",
+      "1000"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/nonlinear_heat/nonlinear_heat_11/prompt.md",
+    "notes": "模型输入包含 blockMeshDict、求解配置、材料模型和 0/T；不包含派生 polyMesh、目标时间场、postProcessing 或 reference_answer.json。标准答案来自 OpenFOAM 13 polynomialSolid 数值解。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/nonlinear_heat/nonlinear_heat_11/qwen3p8flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/nonlinear_heat/nonlinear_heat_11/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 50.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 31.1306445172,
+        "rmse": 51.848824672925275,
+        "max_abs": 128.233781496,
+        "relative_l2": 0.111996256668768,
+        "bias": -1.8476929222999274,
+        "centered_rmse": 51.81589187525992,
+        "centered_relative_l2": 0.8175888813278738,
+        "prediction_l2": 2043.5857880826104,
+        "reference_l2": 2070.3816354330042
+      }
+    },
+    {
+      "time": 150.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 35.25350023119999,
+        "rmse": 51.87967580105789,
+        "max_abs": 107.73833073200001,
+        "relative_l2": 0.10993764590003668,
+        "bias": 2.0239438972001267,
+        "centered_rmse": 51.84018144570734,
+        "centered_relative_l2": 0.6609480532028684,
+        "prediction_l2": 2095.4492314589593,
+        "reference_l2": 2110.40505355732
+      }
+    },
+    {
+      "time": 300.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 29.317089578050002,
+        "rmse": 43.31867425688853,
+        "max_abs": 106.98584752900001,
+        "relative_l2": 0.09068199253695094,
+        "bias": 6.30258950184998,
+        "centered_rmse": 42.85772864893316,
+        "centered_relative_l2": 0.5310158670877618,
+        "prediction_l2": 2147.105767268109,
+        "reference_l2": 2136.333744411343
+      }
+    },
+    {
+      "time": 600.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 30.92132467655,
+        "rmse": 41.992778922465476,
+        "max_abs": 105.703763251,
+        "relative_l2": 0.08683711275993301,
+        "bias": 10.189877452550036,
+        "centered_rmse": 40.737696045960604,
+        "centered_relative_l2": 0.5043649397944084,
+        "prediction_l2": 2202.7622597194213,
+        "reference_l2": 2162.6400337455348
+      }
+    },
+    {
+      "time": 1000.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 38.73764735410002,
+        "rmse": 47.46111280604086,
+        "max_abs": 105.02583025899997,
+        "relative_l2": 0.097291099384393,
+        "bias": 11.23502221770002,
+        "centered_rmse": 46.112162219478755,
+        "centered_relative_l2": 0.5721052977583498,
+        "prediction_l2": 2236.305416093448,
+        "reference_l2": 2181.623502943322
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 33.072041271420005,
+    "rmse": 47.30021329187561,
+    "max_abs": 110.7375106534,
+    "relative_l2": 0.09934882145001632,
+    "centered_rmse": 46.67273204706796,
+    "centered_relative_l2": 0.6172046078342526
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/nonlinear_heat/nonlinear_heat_11",
+    "started_at_utc": "2026-10-31T08:24:21.031572+00:00",
+    "finished_at_utc": "2026-10-31T08:25:13.330342+00:00",
+    "generation_elapsed_seconds": 52.29877941799987,
+    "token_usage": {
+      "input_tokens": 6065,
+      "output_tokens": 2197,
+      "total_tokens": 8262,
+      "provider_usage": {
+        "prompt_tokens": 6065,
+        "total_tokens": 8262,
+        "completion_tokens": 2197,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 6065
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

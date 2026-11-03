@@ -1,0 +1,184 @@
+{
+  "case": {
+    "id": "advection_diffusion_6",
+    "title": "问题 6",
+    "category": "二维瞬态对流扩散",
+    "solver": "incompressibleFluid+scalarTransport",
+    "standard_case_path": "openfoam_cases/advection_diffusion/advection_diffusion_6",
+    "difficulty": "高级",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "0.5",
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "fields": [
+      "U",
+      "p",
+      "C"
+    ],
+    "metrics": [
+      "C point-sample MAE",
+      "C point-sample RMSE",
+      "C relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/advection_diffusion/advection_diffusion_6/prompt.md",
+    "notes": "参考OpenFOAM 13 pitzDailyScalarTransport、pitzDailyPulse与blockedChannel；后向台阶、时变入口速度和时变标量边界。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/advection_diffusion/advection_diffusion_6/qwen3p8flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/advection_diffusion/advection_diffusion_6/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 0.5,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.22067772750921993,
+        "rmse": 0.2553395448549775,
+        "max_abs": 0.423124910288,
+        "relative_l2": 0.6169433104556483,
+        "bias": -0.22067772750922002,
+        "centered_rmse": 0.12845086121982024,
+        "centered_relative_l2": 0.5455464807705334,
+        "prediction_l2": 1.0366324083299732,
+        "reference_l2": 1.6029443679697746
+      }
+    },
+    {
+      "time": 1.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.21830172042654003,
+        "rmse": 0.26204206299372423,
+        "max_abs": 0.444992051619,
+        "relative_l2": 0.6434632575631717,
+        "bias": -0.20680315605373997,
+        "centered_rmse": 0.16093010105079597,
+        "centered_relative_l2": 0.7500834782746416,
+        "prediction_l2": 1.2066896867049124,
+        "reference_l2": 1.5772222175108315
+      }
+    },
+    {
+      "time": 2.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.2782287805444667,
+        "rmse": 0.3108757028648992,
+        "max_abs": 0.503889863834,
+        "relative_l2": 0.6893948962476127,
+        "bias": -0.2782287805444667,
+        "centered_rmse": 0.13868110292496266,
+        "centered_relative_l2": 0.6516439022709436,
+        "prediction_l2": 1.0334892355511014,
+        "reference_l2": 1.7464829323364015
+      }
+    },
+    {
+      "time": 3.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.38375234660970003,
+        "rmse": 0.4064772584648841,
+        "max_abs": 0.610086896465,
+        "relative_l2": 1.0620438631829987,
+        "bias": -0.2572127971936333,
+        "centered_rmse": 0.3147464671905866,
+        "centered_relative_l2": 1.726880070409128,
+        "prediction_l2": 0.6870953354520755,
+        "reference_l2": 1.4823113312178546
+      }
+    },
+    {
+      "time": 4.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.3990281578521333,
+        "rmse": 0.4290550603495754,
+        "max_abs": 0.599449737122,
+        "relative_l2": 0.9298415465389005,
+        "bias": -0.3990281578521333,
+        "centered_rmse": 0.15768568119113033,
+        "centered_relative_l2": 1.4462373269614222,
+        "prediction_l2": 0.42731721238442993,
+        "reference_l2": 1.7871035226649818
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 0.29999774658841194,
+    "rmse": 0.33275792590561204,
+    "max_abs": 0.5163086918655999,
+    "relative_l2": 0.7883373747976663,
+    "centered_rmse": 0.18009884271545917,
+    "centered_relative_l2": 1.024078251737334
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/advection_diffusion/advection_diffusion_6",
+    "started_at_utc": "2026-10-31T08:26:29.287146+00:00",
+    "finished_at_utc": "2026-10-31T08:29:55.139180+00:00",
+    "generation_elapsed_seconds": 205.85203318599997,
+    "token_usage": {
+      "input_tokens": 19995,
+      "output_tokens": 1660,
+      "total_tokens": 21655,
+      "provider_usage": {
+        "completion_tokens": 1660,
+        "prompt_tokens": 19995,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 19995
+        },
+        "total_tokens": 21655
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

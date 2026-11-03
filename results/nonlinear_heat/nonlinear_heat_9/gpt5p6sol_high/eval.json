@@ -1,0 +1,268 @@
+{
+  "case": {
+    "id": "nonlinear_heat_9",
+    "title": "问题 9",
+    "category": "二维非线性瞬态导热",
+    "solver": "solid",
+    "standard_case_path": "openfoam_cases/nonlinear_heat/nonlinear_heat_9",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "50",
+      "150",
+      "300",
+      "600",
+      "1000"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/nonlinear_heat/nonlinear_heat_9/prompt.md",
+    "notes": "模型输入包含 blockMeshDict、求解配置、材料模型和 0/T；不包含派生 polyMesh、目标时间场、postProcessing 或 reference_answer.json。标准答案来自 OpenFOAM 13 polynomialSolid 数值解。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/nonlinear_heat/nonlinear_heat_9/gpt5p6sol_high/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/nonlinear_heat/nonlinear_heat_9/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 50.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 0.8970882995499949,
+        "rmse": 1.9192324791510145,
+        "max_abs": 7.532643764999989,
+        "relative_l2": 0.005049232981231444,
+        "bias": -0.7947536522499945,
+        "centered_rmse": 1.746945889620925,
+        "centered_relative_l2": 0.05197443081976483,
+        "prediction_l2": 1695.9685138586742,
+        "reference_l2": 1699.8757252672724
+      }
+    },
+    {
+      "time": 150.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 4.730268669650002,
+        "rmse": 6.671778129376568,
+        "max_abs": 16.721651082999983,
+        "relative_l2": 0.017560783485310094,
+        "bias": 2.7813296534500296,
+        "centered_rmse": 6.064390222146592,
+        "centered_relative_l2": 0.1286388892199405,
+        "prediction_l2": 1710.8649391462786,
+        "reference_l2": 1699.075606798754
+      }
+    },
+    {
+      "time": 300.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 8.129464396650002,
+        "rmse": 12.770316705288366,
+        "max_abs": 38.65018606299998,
+        "relative_l2": 0.033665560851581414,
+        "bias": 6.426275410749952,
+        "centered_rmse": 11.035577606023034,
+        "centered_relative_l2": 0.1969770841516014,
+        "prediction_l2": 1724.8810132875833,
+        "reference_l2": 1696.40995277728
+      }
+    },
+    {
+      "time": 600.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 16.070612917200005,
+        "rmse": 22.03440197886278,
+        "max_abs": 53.15934447699999,
+        "relative_l2": 0.05820761067123316,
+        "bias": 16.070612917200037,
+        "centered_rmse": 15.074822421230582,
+        "centered_relative_l2": 0.23717621485643064,
+        "prediction_l2": 1764.293736881702,
+        "reference_l2": 1692.9202246964257
+      }
+    },
+    {
+      "time": 1000.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 17.39641887845,
+        "rmse": 21.316898152923887,
+        "max_abs": 54.132733261,
+        "relative_l2": 0.056369363470944095,
+        "bias": 17.24425800795001,
+        "centered_rmse": 12.531788085400352,
+        "centered_relative_l2": 0.18788009355055668,
+        "prediction_l2": 1766.8582965252192,
+        "reference_l2": 1691.203533421031
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 9.444770632300001,
+    "rmse": 12.942525489120522,
+    "max_abs": 34.03931172979999,
+    "relative_l2": 0.034170510292060044,
+    "centered_rmse": 9.290704844884297,
+    "centered_relative_l2": 0.16052934251965884
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/gpt5p6sol_high.json",
+    "model_name": "gpt-5.6-sol",
+    "model_alias": "gpt5p6sol_high"
+  },
+  "generation": {
+    "model_name": "gpt-5.6-sol",
+    "model_alias": "gpt5p6sol_high",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/nonlinear_heat/nonlinear_heat_9",
+    "started_at_utc": "2026-10-31T03:48:18.213085+00:00",
+    "finished_at_utc": "2026-10-31T03:48:58.313561+00:00",
+    "generation_elapsed_seconds": 40.100473140999384,
+    "token_usage": {
+      "input_tokens": 10762,
+      "output_tokens": 4070,
+      "total_tokens": 14832,
+      "provider_usage": {
+        "input_tokens": 10762,
+        "input_tokens_details": {
+          "cached_tokens": 4224,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 4070,
+        "output_tokens_details": {
+          "reasoning_tokens": 3169
+        },
+        "total_tokens": 14832,
+        "attribution": {
+          "items": {
+            "msg_039fbcabbdeb6f83016ae56505dc9481998b687249ae428d1f": {
+              "input_tokens": 6360,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0,
+              "content": [
+                {
+                  "input_tokens": 6360,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                }
+              ]
+            },
+            "msg_039fbcabbdeb6f83016ae5652073e88199835ca002c867f905": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 901,
+              "content": [
+                {
+                  "input_tokens": 0,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 901
+                }
+              ]
+            },
+            "rs_039fbcabbdeb6f83016ae5650aaff0819986a3fa47be813c54": {
+              "input_tokens": 2,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 516
+            },
+            "rs_039fbcabbdeb6f83016ae5650f0e808199aa748b46e645f6f8": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_039fbcabbdeb6f83016ae5651390c881999a92dda06e3ae6d4": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_039fbcabbdeb6f83016ae565176c788199b0e11154d50d4f3d": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_039fbcabbdeb6f83016ae5651b71f08199b462d7b86aef8ca6": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_039fbcabbdeb6f83016ae5651fd9cc819993d6d2bae3b80ef3": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_039fbcabbdeb6f83016ae565206970819994a8456a64252701": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 63
+            }
+          },
+          "request_fields": {
+            "instructions": {
+              "input_tokens": 4400,
+              "cached_tokens": 4224,
+              "cache_write_tokens": 0,
+              "output_tokens": 0
+            }
+          }
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "case": {
+    "id": "heat_conduction_42",
+    "title": "问题 42",
+    "category": "一维传热/无限域高斯温度脉冲",
+    "solver": null,
+    "standard_case_path": null,
+    "difficulty": "进阶",
+    "input_times": [],
+    "target_times": [
+      "2",
+      "8",
+      "20",
+      "50",
+      "100"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/heat_conduction/heat_conduction_42/prompt.md",
+    "notes": "一维常物性热传导定量预测；标准答案由对应构型的闭式解或收敛Fourier级数生成，不依赖OpenFOAM。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/heat_conduction/heat_conduction_42/gpt6p1sol/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/heat_conduction/heat_conduction_42/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 2.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 12.042015659203715,
+        "rmse": 14.799029128599864,
+        "max_abs": 23.657986033524026,
+        "relative_l2": 0.04311489347450568,
+        "bias": -12.040522284426345,
+        "centered_rmse": 8.604480592538934,
+        "centered_relative_l2": 0.2511074294692022,
+        "prediction_l2": 1192.9266847332033,
+        "reference_l2": 1237.592257575762
+      }
+    },
+    {
+      "time": 8.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 0.010857437234492933,
+        "rmse": 0.013188466308607472,
+        "max_abs": 0.021228864331988007,
+        "relative_l2": 3.900686534920193e-05,
+        "bias": 0.005411814543208493,
+        "centered_rmse": 0.012026965823643834,
+        "centered_relative_l2": 0.0008790168623487844,
+        "prediction_l2": 1219.078181031827,
+        "reference_l2": 1219.0595448958939
+      }
+    },
+    {
+      "time": 20.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 0.009709739110038439,
+        "rmse": 0.013561650901896278,
+        "max_abs": 0.02792164190486801,
+        "relative_l2": 4.105433950232595e-05,
+        "bias": -0.005561592357253176,
+        "centered_rmse": 0.012368794025111172,
+        "centered_relative_l2": 0.002446870944408612,
+        "prediction_l2": 1191.0166562928496,
+        "reference_l2": 1191.0367649188267
+      }
+    },
+    {
+      "time": 50.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 0.8698903199700768,
+        "rmse": 1.1495230942706458,
+        "max_abs": 2.0206511085469288,
+        "relative_l2": 0.0035749334842850567,
+        "bias": -0.8698903199701249,
+        "centered_rmse": 0.7514613599406943,
+        "centered_relative_l2": 0.4929264081963353,
+        "prediction_l2": 1156.2476011442532,
+        "reference_l2": 1159.3682727083583
+      }
+    },
+    {
+      "time": 100.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 0.16259728769549697,
+        "rmse": 0.2166650144752604,
+        "max_abs": 0.3769921751553511,
+        "relative_l2": 0.0006858612293027519,
+        "bias": -0.12578886562243952,
+        "centered_rmse": 0.17641113848900486,
+        "centered_relative_l2": 0.3075708289968912,
+        "prediction_l2": 1138.547617131093,
+        "reference_l2": 1139.0012817663792
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 2.619014088642764,
+    "rmse": 3.238393470911255,
+    "max_abs": 5.2209559646926325,
+    "relative_l2": 0.009491149878589004,
+    "centered_rmse": 1.9113497701634778,
+    "centered_relative_l2": 0.2109861108938372
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/gpt6.json",
+    "model_name": "gpt-6.1-sol",
+    "model_alias": "gpt6p1sol"
+  },
+  "generation": {
+    "model_name": "gpt-6.1-sol",
+    "model_alias": "gpt6p1sol",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/heat_conduction/heat_conduction_42",
+    "started_at_utc": "2026-10-27T11:42:20.890115+00:00",
+    "finished_at_utc": "2026-10-27T11:46:45.373531+00:00",
+    "generation_elapsed_seconds": 264.48347163699873,
+    "token_usage": {
+      "input_tokens": 1595,
+      "output_tokens": 2557,
+      "total_tokens": 4152,
+      "provider_usage": {
+        "input_tokens": 1595,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 2557,
+        "output_tokens_details": {
+          "reasoning_tokens": 1556
+        },
+        "total_tokens": 4152,
+        "attribution": {
+          "items": {
+            "msg_00bf89df5df73846016ae08ee778d88191b732fcd59a789fa1": {
+              "input_tokens": 1528,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0,
+              "content": [
+                {
+                  "input_tokens": 1528,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                }
+              ]
+            },
+            "msg_00bf89df5df73846016ae08ef04f848191a87cc0ff89d84f59": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 1001,
+              "content": [
+                {
+                  "input_tokens": 0,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 1001
+                }
+              ]
+            },
+            "rs_00bf89df5df73846016ae08ead5684ed72499006739975f308": {
+              "input_tokens": 4,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 996
+            },
+            "rs_00bf89df5df73846016ae08ef03fb88191b293284f46e24bdd": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 560
+            }
+          },
+          "request_fields": {
+            "instructions": {
+              "input_tokens": 63,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0
+            }
+          }
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

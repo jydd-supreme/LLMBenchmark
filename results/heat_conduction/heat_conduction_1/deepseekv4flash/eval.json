@@ -1,0 +1,165 @@
+{
+  "case": {
+    "id": "heat_conduction_1",
+    "title": "问题 1",
+    "category": "一维传热/扩散",
+    "solver": null,
+    "standard_case_path": null,
+    "difficulty": "入门",
+    "input_times": [],
+    "target_times": [
+      "0.3",
+      "0.4",
+      "0.5",
+      "0.6"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/heat_conduction/heat_conduction_1/prompt.md",
+    "notes": "直接根据题目给定的热方程、初始条件和边界条件计算指定坐标与时刻的温度；标准答案由 Fourier 级数解析生成器产生，不依赖 OpenFOAM 网格或时间离散。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/heat_conduction/heat_conduction_1/deepseekv4flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/heat_conduction/heat_conduction_1/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 0.3,
+      "field": "T",
+      "metrics": {
+        "cells": 11,
+        "components": 1,
+        "mae": 0.0024486325387081047,
+        "rmse": 0.00532573003828113,
+        "max_abs": 0.013076303022899083,
+        "relative_l2": 1.5740731601401986e-05,
+        "bias": 0.0022254707726006018,
+        "centered_rmse": 0.004838458461198505,
+        "centered_relative_l2": 5.21666308599913e-05,
+        "prediction_l2": 1122.1560055772236,
+        "reference_l2": 1122.149129976295
+      }
+    },
+    {
+      "time": 0.4,
+      "field": "T",
+      "metrics": {
+        "cells": 11,
+        "components": 1,
+        "mae": 0.0029475733725441637,
+        "rmse": 0.005169105661415415,
+        "max_abs": 0.014847641125811606,
+        "relative_l2": 1.5014834287385401e-05,
+        "bias": 0.0017799704586991538,
+        "centered_rmse": 0.004852974191691028,
+        "centered_relative_l2": 5.1402300149690875e-05,
+        "prediction_l2": 1141.809226369274,
+        "reference_l2": 1141.8030763762872
+      }
+    },
+    {
+      "time": 0.5,
+      "field": "T",
+      "metrics": {
+        "cells": 11,
+        "components": 1,
+        "mae": 0.0006263962768881273,
+        "rmse": 0.0009216470957726492,
+        "max_abs": 0.0021955973294325304,
+        "relative_l2": 2.6374154155131928e-06,
+        "bias": -0.00046639249717372877,
+        "centered_rmse": 0.0007949285551262664,
+        "centered_relative_l2": 8.311454453424281e-06,
+        "prediction_l2": 1158.9960191165455,
+        "reference_l2": 1158.9973986725322
+      }
+    },
+    {
+      "time": 0.6,
+      "field": "T",
+      "metrics": {
+        "cells": 11,
+        "components": 1,
+        "mae": 0.00036719170334332705,
+        "rmse": 0.0005033448974703062,
+        "max_abs": 0.0009615457349809731,
+        "relative_l2": 1.4214854327076646e-06,
+        "bias": -0.0003642926371867361,
+        "centered_rmse": 0.00034734271304389134,
+        "centered_relative_l2": 3.5973377144802606e-06,
+        "prediction_l2": 1174.408493689057,
+        "reference_l2": 1174.4096187246935
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 0.0015974484728709308,
+    "rmse": 0.002979956923234875,
+    "max_abs": 0.007770271803281048,
+    "relative_l2": 8.703616684252063e-06,
+    "centered_rmse": 0.002708425980264923,
+    "centered_relative_l2": 2.8869430794396677e-05
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/deepseekv4flash.json",
+    "model_name": "deepseek-v4-flash-ga-260731",
+    "model_alias": "deepseekv4flash"
+  },
+  "generation": {
+    "model_name": "deepseek-v4-flash-ga-260731",
+    "model_alias": "deepseekv4flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/heat_conduction/heat_conduction_1",
+    "started_at_utc": "2026-10-28T05:04:54.454223+00:00",
+    "finished_at_utc": "2026-10-28T05:10:54.225516+00:00",
+    "generation_elapsed_seconds": 359.77122805600084,
+    "token_usage": {
+      "input_tokens": 855,
+      "output_tokens": 48188,
+      "total_tokens": 49043,
+      "provider_usage": {
+        "completion_tokens": 48188,
+        "prompt_tokens": 855,
+        "total_tokens": 49043,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 47761
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

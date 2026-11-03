@@ -1,0 +1,298 @@
+{
+  "case": {
+    "id": "nonlinear_heat_12",
+    "title": "问题 12",
+    "category": "二维非线性瞬态导热",
+    "solver": "solid",
+    "standard_case_path": "openfoam_cases/nonlinear_heat/nonlinear_heat_12",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "50",
+      "150",
+      "300",
+      "600",
+      "1000"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/nonlinear_heat/nonlinear_heat_12/prompt.md",
+    "notes": "模型输入包含 blockMeshDict、求解配置、材料模型和 0/T；不包含派生 polyMesh、目标时间场、postProcessing 或 reference_answer.json。标准答案来自 OpenFOAM 13 polynomialSolid 数值解。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/nonlinear_heat/nonlinear_heat_12/gpt5p6sol/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/nonlinear_heat/nonlinear_heat_12/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 50.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 4.12089079095,
+        "rmse": 8.969989891032633,
+        "max_abs": 26.467834931000027,
+        "relative_l2": 0.02295632300418327,
+        "bias": 1.1726283350500921,
+        "centered_rmse": 8.893011943827888,
+        "centered_relative_l2": 0.21604469098388843,
+        "prediction_l2": 1756.5172344728076,
+        "reference_l2": 1747.449463067746
+      }
+    },
+    {
+      "time": 150.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 3.3809757568999883,
+        "rmse": 5.041128575389246,
+        "max_abs": 16.89380674099999,
+        "relative_l2": 0.012629349702242533,
+        "bias": -1.1683120128000155,
+        "centered_rmse": 4.9038785011818185,
+        "centered_relative_l2": 0.08687463579235322,
+        "prediction_l2": 1778.8157858530487,
+        "reference_l2": 1785.096848792691
+      }
+    },
+    {
+      "time": 300.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 4.970029184949993,
+        "rmse": 9.529687500593,
+        "max_abs": 38.949603223,
+        "relative_l2": 0.02343667504402153,
+        "bias": 0.7583525006499485,
+        "centered_rmse": 9.499465529371445,
+        "centered_relative_l2": 0.14917154577952804,
+        "prediction_l2": 1821.0575649879936,
+        "reference_l2": 1818.4344848943706
+      }
+    },
+    {
+      "time": 600.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 6.081749452950001,
+        "rmse": 12.86627883748552,
+        "max_abs": 54.61095149200003,
+        "relative_l2": 0.030947614857444745,
+        "bias": 2.6358083295499455,
+        "centered_rmse": 12.593396903687372,
+        "centered_relative_l2": 0.19173512937046208,
+        "prediction_l2": 1870.4759433630788,
+        "reference_l2": 1859.2627723078779
+      }
+    },
+    {
+      "time": 1000.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 6.574427242450005,
+        "rmse": 13.614286844645413,
+        "max_abs": 56.786215728,
+        "relative_l2": 0.03214859789827766,
+        "bias": 2.3461718456499625,
+        "centered_rmse": 13.410603415169822,
+        "centered_relative_l2": 0.20635853921100952,
+        "prediction_l2": 1905.0455375134736,
+        "reference_l2": 1893.85994040127
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 5.0256144856399985,
+    "rmse": 10.004274329829162,
+    "max_abs": 38.74168242300001,
+    "relative_l2": 0.02442371210123395,
+    "centered_rmse": 9.860071258647668,
+    "centered_relative_l2": 0.17003690822744827
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/gpt5p6sol.json",
+    "model_name": "gpt-5.6-sol",
+    "model_alias": "gpt5p6sol"
+  },
+  "generation": {
+    "model_name": "gpt-5.6-sol",
+    "model_alias": "gpt5p6sol",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/nonlinear_heat/nonlinear_heat_12",
+    "started_at_utc": "2026-10-30T11:32:08.499276+00:00",
+    "finished_at_utc": "2026-10-30T11:33:05.426378+00:00",
+    "generation_elapsed_seconds": 56.92706833200009,
+    "token_usage": {
+      "input_tokens": 9393,
+      "output_tokens": 6834,
+      "total_tokens": 16227,
+      "provider_usage": {
+        "input_tokens": 9393,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 6834,
+        "output_tokens_details": {
+          "reasoning_tokens": 5933
+        },
+        "total_tokens": 16227,
+        "attribution": {
+          "items": {
+            "msg_02e96ef329827980016ae4803bbc8881969df6e176a482c8a3": {
+              "input_tokens": 4991,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0,
+              "content": [
+                {
+                  "input_tokens": 4991,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                }
+              ]
+            },
+            "msg_02e96ef329827980016ae4806ac96081968ee980387898b7f5": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 901,
+              "content": [
+                {
+                  "input_tokens": 0,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 901
+                }
+              ]
+            },
+            "rs_02e96ef329827980016ae48040cc8c81968053f56def76bb2c": {
+              "input_tokens": 2,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 516
+            },
+            "rs_02e96ef329827980016ae480453968819690f4b21fabef47ac": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_02e96ef329827980016ae480498400819695c2390f8369c486": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_02e96ef329827980016ae4804dc0648196b0d80dce24b79d16": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_02e96ef329827980016ae48051c4d88196a6905ce72ddd10b3": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_02e96ef329827980016ae48055d84c8196af346399e0135b35": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_02e96ef329827980016ae48059709c8196a858ae32d5ce2002": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_02e96ef329827980016ae4805d52ac81968371f91471f1a933": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_02e96ef329827980016ae48061566481969b40b31acb660af4": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_02e96ef329827980016ae48064f23c8196bd7d98b7f4baafea": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_02e96ef329827980016ae4806944c88196a61be728390221fa": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_02e96ef329827980016ae4806abf8481968bbef107481d888c": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 237
+            }
+          },
+          "request_fields": {
+            "instructions": {
+              "input_tokens": 4400,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0
+            }
+          }
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "case": {
+    "id": "nonlinear_heat_23",
+    "title": "问题 23",
+    "category": "二维非线性瞬态导热",
+    "solver": "solid",
+    "standard_case_path": "openfoam_cases/nonlinear_heat/nonlinear_heat_23",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "50",
+      "150",
+      "300",
+      "600",
+      "1000"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/nonlinear_heat/nonlinear_heat_23/prompt.md",
+    "notes": "模型输入包含 blockMeshDict、求解配置、材料模型和 0/T；不包含派生 polyMesh、目标时间场、postProcessing 或 reference_answer.json。标准答案来自 OpenFOAM 13 polynomialSolid 数值解。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/nonlinear_heat/nonlinear_heat_23/qwen3p8flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/nonlinear_heat/nonlinear_heat_23/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 50.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 92.5471440206,
+        "rmse": 105.30662608822655,
+        "max_abs": 170.046184573,
+        "relative_l2": 0.22200773489602196,
+        "bias": 92.54714402060023,
+        "centered_rmse": 50.24451842455932,
+        "centered_relative_l2": 0.6370624478159466,
+        "prediction_l2": 2542.7571846274172,
+        "reference_l2": 2121.3024359237916
+      }
+    },
+    {
+      "time": 150.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 55.52916726239998,
+        "rmse": 65.34347106062691,
+        "max_abs": 109.74967463799999,
+        "relative_l2": 0.1308662581665251,
+        "bias": 52.507640020600036,
+        "centered_rmse": 38.893662076462704,
+        "centered_relative_l2": 0.35957671872604885,
+        "prediction_l2": 2442.557804024048,
+        "reference_l2": 2233.004064216865
+      }
+    },
+    {
+      "time": 300.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 55.11740702280001,
+        "rmse": 63.73704090192538,
+        "max_abs": 110.65907380499999,
+        "relative_l2": 0.12372952630817298,
+        "bias": 8.291853501900107,
+        "centered_rmse": 63.19537600518522,
+        "centered_relative_l2": 0.5357150894945734,
+        "prediction_l2": 2296.0181427089638,
+        "reference_l2": 2303.7404311467967
+      }
+    },
+    {
+      "time": 600.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 89.3082393647,
+        "rmse": 98.74262857879332,
+        "max_abs": 154.32801931699998,
+        "relative_l2": 0.18788692180219327,
+        "bias": -34.99143244180004,
+        "centered_rmse": 92.33475160696797,
+        "centered_relative_l2": 0.7695898404909939,
+        "prediction_l2": 2138.1435710432543,
+        "reference_l2": 2350.299080546413
+      }
+    },
+    {
+      "time": 1000.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 110.30252640065001,
+        "rmse": 126.61490449831119,
+        "max_abs": 207.78183924100006,
+        "relative_l2": 0.2394269906290851,
+        "bias": -58.04340043694981,
+        "centered_rmse": 112.52687548684686,
+        "centered_relative_l2": 0.9361175413410636,
+        "prediction_l2": 2045.2127710130503,
+        "reference_l2": 2364.975917535297
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 80.56089681423,
+    "rmse": 91.94893422557666,
+    "max_abs": 150.5129583148,
+    "relative_l2": 0.1807834863603997,
+    "centered_rmse": 71.43903672000441,
+    "centered_relative_l2": 0.6476123275737253
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/nonlinear_heat/nonlinear_heat_23",
+    "started_at_utc": "2026-10-31T08:24:47.033965+00:00",
+    "finished_at_utc": "2026-10-31T08:25:16.635586+00:00",
+    "generation_elapsed_seconds": 29.60162825799989,
+    "token_usage": {
+      "input_tokens": 8038,
+      "output_tokens": 1772,
+      "total_tokens": 9810,
+      "provider_usage": {
+        "prompt_tokens": 8038,
+        "total_tokens": 9810,
+        "completion_tokens": 1772,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 8038
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

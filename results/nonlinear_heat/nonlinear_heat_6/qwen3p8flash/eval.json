@@ -1,0 +1,183 @@
+{
+  "case": {
+    "id": "nonlinear_heat_6",
+    "title": "问题 6",
+    "category": "二维非线性瞬态导热",
+    "solver": "solid",
+    "standard_case_path": "openfoam_cases/nonlinear_heat/nonlinear_heat_6",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "50",
+      "150",
+      "300",
+      "600",
+      "1000"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/nonlinear_heat/nonlinear_heat_6/prompt.md",
+    "notes": "模型输入包含 blockMeshDict、求解配置、材料模型和 0/T；不包含派生 polyMesh、目标时间场、postProcessing 或 reference_answer.json。标准答案来自 OpenFOAM 13 polynomialSolid 数值解。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/nonlinear_heat/nonlinear_heat_6/qwen3p8flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/nonlinear_heat/nonlinear_heat_6/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 50.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 32.02211847635001,
+        "rmse": 48.19596645157105,
+        "max_abs": 121.72017762600001,
+        "relative_l2": 0.12675307523668525,
+        "bias": 3.627041270649954,
+        "centered_rmse": 48.05929414610627,
+        "centered_relative_l2": 1.0116191353622672,
+        "prediction_l2": 1703.36224152497,
+        "reference_l2": 1700.4629990361173
+      }
+    },
+    {
+      "time": 150.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 57.6428842228,
+        "rmse": 70.09797842282026,
+        "max_abs": 154.63448746400002,
+        "relative_l2": 0.18409925774285257,
+        "bias": 8.483014544300033,
+        "centered_rmse": 69.5827927235417,
+        "centered_relative_l2": 1.0308313548056216,
+        "prediction_l2": 1713.8225256658548,
+        "reference_l2": 1702.8188680442952
+      }
+    },
+    {
+      "time": 300.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 76.01026298955,
+        "rmse": 86.44902013133905,
+        "max_abs": 167.275548153,
+        "relative_l2": 0.22617270119070837,
+        "bias": 13.404250713749946,
+        "centered_rmse": 85.40350779957225,
+        "centered_relative_l2": 1.0548869235531924,
+        "prediction_l2": 1730.6969370140605,
+        "reference_l2": 1709.3653176023822
+      }
+    },
+    {
+      "time": 600.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 91.13575313595001,
+        "rmse": 100.43368720172558,
+        "max_abs": 173.752020701,
+        "relative_l2": 0.2603909916979874,
+        "bias": 18.904412281849943,
+        "centered_rmse": 98.63847485242206,
+        "centered_relative_l2": 1.0964904253685417,
+        "prediction_l2": 1762.5035484432337,
+        "reference_l2": 1724.9179808376975
+      }
+    },
+    {
+      "time": 1000.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 99.96890459199999,
+        "rmse": 109.0987469547215,
+        "max_abs": 175.06892428900005,
+        "relative_l2": 0.2807292918750961,
+        "bias": 25.671798086599892,
+        "centered_rmse": 106.0353496249774,
+        "centered_relative_l2": 1.1453050891651577,
+        "prediction_l2": 1804.0851981287249,
+        "reference_l2": 1737.9890272323007
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 71.35598468332999,
+    "rmse": 82.8550798324355,
+    "max_abs": 158.49023164660002,
+    "relative_l2": 0.21562906354866596,
+    "centered_rmse": 81.54388382932395,
+    "centered_relative_l2": 1.0678265856509561
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/nonlinear_heat/nonlinear_heat_6",
+    "started_at_utc": "2026-10-31T08:23:57.123107+00:00",
+    "finished_at_utc": "2026-10-31T08:24:24.799875+00:00",
+    "generation_elapsed_seconds": 27.67676296000036,
+    "token_usage": {
+      "input_tokens": 6042,
+      "output_tokens": 1801,
+      "total_tokens": 7843,
+      "provider_usage": {
+        "prompt_tokens": 6042,
+        "total_tokens": 7843,
+        "completion_tokens": 1801,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 6042
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

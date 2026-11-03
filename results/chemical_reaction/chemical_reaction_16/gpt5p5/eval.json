@@ -1,0 +1,243 @@
+{
+  "case": {
+    "id": "chemical_reaction_16",
+    "title": "问题 16",
+    "category": "化学反应",
+    "solver": "foamRun",
+    "standard_case_path": "openfoam_cases/chemical_reaction/chemical_reaction_16",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "0.05",
+      "0.1",
+      "0.25",
+      "0.5"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "scalar MAE",
+      "scalar RMSE",
+      "relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/chemical_reaction/chemical_reaction_16/prompt.md",
+    "notes": "OpenFOAM 13 counterFlowFlame2D prototype; only initial state varied; T (温度, K) scored."
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/chemical_reaction/chemical_reaction_16/gpt5p5/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/chemical_reaction/chemical_reaction_16/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 0.05,
+      "field": "T",
+      "metrics": {
+        "cells": 9,
+        "components": 1,
+        "mae": 474.7132222222222,
+        "rmse": 539.476226903775,
+        "max_abs": 826.938,
+        "relative_l2": 0.41803922110938685,
+        "bias": 472.85544444444463,
+        "centered_rmse": 259.696607705184,
+        "centered_relative_l2": 0.5080108344764525,
+        "prediction_l2": 5145.425152501977,
+        "reference_l2": 3871.475686937605
+      }
+    },
+    {
+      "time": 0.1,
+      "field": "T",
+      "metrics": {
+        "cells": 9,
+        "components": 1,
+        "mae": 360.6513333333333,
+        "rmse": 403.78039857383425,
+        "max_abs": 596.952,
+        "relative_l2": 0.3327417471427157,
+        "bias": 191.56022222222214,
+        "centered_rmse": 355.44801523516384,
+        "centered_relative_l2": 0.5799244664873995,
+        "prediction_l2": 3913.118960624632,
+        "reference_l2": 3640.4845683578997
+      }
+    },
+    {
+      "time": 0.25,
+      "field": "T",
+      "metrics": {
+        "cells": 9,
+        "components": 1,
+        "mae": 248.1882222222222,
+        "rmse": 295.5264877510042,
+        "max_abs": 627.76,
+        "relative_l2": 0.24741280132184232,
+        "bias": 31.0104444444446,
+        "centered_rmse": 293.89497664608433,
+        "centered_relative_l2": 0.45846546741824534,
+        "prediction_l2": 3414.308129035808,
+        "reference_l2": 3583.401742013027
+      }
+    },
+    {
+      "time": 0.5,
+      "field": "T",
+      "metrics": {
+        "cells": 9,
+        "components": 1,
+        "mae": 222.82955555555557,
+        "rmse": 295.61612913408874,
+        "max_abs": 737.3,
+        "relative_l2": 0.24718360630369046,
+        "bias": -26.51800000000003,
+        "centered_rmse": 294.42433914373015,
+        "centered_relative_l2": 0.4586756065437302,
+        "prediction_l2": 3265.478372306269,
+        "reference_l2": 3587.812317588254
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 326.5955833333333,
+    "rmse": 383.5998105906756,
+    "max_abs": 697.2375,
+    "relative_l2": 0.3113443439694088,
+    "centered_rmse": 300.86598468254056,
+    "centered_relative_l2": 0.5012690937314569
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/gpt-5.5.json",
+    "model_name": "gpt-5.5",
+    "model_alias": "gpt5p5"
+  },
+  "generation": {
+    "model_name": "gpt-5.5",
+    "model_alias": "gpt5p5",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/chemical_reaction/chemical_reaction_16",
+    "started_at_utc": "2026-10-31T07:48:51.942846+00:00",
+    "finished_at_utc": "2026-10-31T07:49:23.326330+00:00",
+    "generation_elapsed_seconds": 31.38348912099991,
+    "token_usage": {
+      "input_tokens": 6751,
+      "output_tokens": 2580,
+      "total_tokens": 9331,
+      "provider_usage": {
+        "attribution": {
+          "items": {
+            "msg_030615afa7a0990c016ae59d684d0c8191840bb193184cd365": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 6725,
+                  "output_tokens": 0
+                }
+              ],
+              "input_tokens": 6725,
+              "output_tokens": 0
+            },
+            "msg_030615afa7a0990c016ae59d684d0c8191a7390d031587a33b": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 24,
+                  "output_tokens": 0
+                }
+              ],
+              "input_tokens": 24,
+              "output_tokens": 0
+            },
+            "msg_030615afa7a0990c016ae59d7b94ec8191ba06c29bc26be6da": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 287
+                }
+              ],
+              "input_tokens": 0,
+              "output_tokens": 287
+            },
+            "rs_030615afa7a0990c016ae59d6d19208191b01af6fc2510bac3": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 2,
+              "output_tokens": 516
+            },
+            "rs_030615afa7a0990c016ae59d71870c81918beb11c28eabdf45": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_030615afa7a0990c016ae59d75a9488191bcbb69447651db5e": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_030615afa7a0990c016ae59d79bdf481918cf2d240c6e4d9fd": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_030615afa7a0990c016ae59d7b8b408191bd9e767f7e903fe8": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 223
+            }
+          }
+        },
+        "input_tokens": 6751,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 2580,
+        "output_tokens_details": {
+          "reasoning_tokens": 2293
+        },
+        "total_tokens": 9331
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

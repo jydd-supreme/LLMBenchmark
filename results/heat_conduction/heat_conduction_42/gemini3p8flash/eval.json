@@ -1,0 +1,188 @@
+{
+  "case": {
+    "id": "heat_conduction_42",
+    "title": "问题 42",
+    "category": "一维传热/无限域高斯温度脉冲",
+    "solver": null,
+    "standard_case_path": null,
+    "difficulty": "进阶",
+    "input_times": [],
+    "target_times": [
+      "2",
+      "8",
+      "20",
+      "50",
+      "100"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/heat_conduction/heat_conduction_42/prompt.md",
+    "notes": "一维常物性热传导定量预测；标准答案由对应构型的闭式解或收敛Fourier级数生成，不依赖OpenFOAM。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/heat_conduction/heat_conduction_42/gemini3p8flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/heat_conduction/heat_conduction_42/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 2.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 23.596160838272535,
+        "rmse": 28.721899287516212,
+        "max_abs": 44.66673126394727,
+        "relative_l2": 0.08367722080995063,
+        "bias": -23.59616083827251,
+        "centered_rmse": 16.375856996707007,
+        "centered_relative_l2": 0.47790210130336114,
+        "prediction_l2": 1148.2595440966325,
+        "reference_l2": 1237.592257575762
+      }
+    },
+    {
+      "time": 8.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 14.222605085456783,
+        "rmse": 14.797427082451874,
+        "max_abs": 19.273750085346194,
+        "relative_l2": 0.04376560793449675,
+        "bias": -14.222605085456678,
+        "centered_rmse": 4.084281190566957,
+        "centered_relative_l2": 0.2985085423643956,
+        "prediction_l2": 1168.2709862795055,
+        "reference_l2": 1219.0595448958939
+      }
+    },
+    {
+      "time": 20.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 6.5003223220691755,
+        "rmse": 7.35182304104315,
+        "max_abs": 11.601077623053754,
+        "relative_l2": 0.02225571512431461,
+        "bias": -2.2950137000495374,
+        "centered_rmse": 6.984426543632436,
+        "centered_relative_l2": 1.3817022369581315,
+        "prediction_l2": 1183.4104505434213,
+        "reference_l2": 1191.0367649188267
+      }
+    },
+    {
+      "time": 50.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 9.994991026183776,
+        "rmse": 11.10649074704507,
+        "max_abs": 16.02155496881511,
+        "relative_l2": 0.034540381017491205,
+        "bias": 9.994991026183698,
+        "centered_rmse": 4.842963049694221,
+        "centered_relative_l2": 3.176775957318342,
+        "prediction_l2": 1195.612681139149,
+        "reference_l2": 1159.3682727083583
+      }
+    },
+    {
+      "time": 100.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 15.572485303608342,
+        "rmse": 15.749220273535471,
+        "max_abs": 18.384697151990906,
+        "relative_l2": 0.04985474744747148,
+        "bias": 15.572485303608346,
+        "centered_rmse": 2.35279423096091,
+        "centered_relative_l2": 4.102070188276989,
+        "prediction_l2": 1195.193327290213,
+        "reference_l2": 1139.0012817663792
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 13.977312915118123,
+    "rmse": 15.545372086318356,
+    "max_abs": 21.989562218630645,
+    "relative_l2": 0.046818734466744935,
+    "centered_rmse": 6.928064402312306,
+    "centered_relative_l2": 1.8873918052442442
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/gemini-3.8-flash.json",
+    "model_name": "gemini-3.8-flash",
+    "model_alias": "gemini3p8flash"
+  },
+  "generation": {
+    "model_name": "gemini-3.8-flash",
+    "model_alias": "gemini3p8flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/heat_conduction/heat_conduction_42",
+    "started_at_utc": "2026-10-30T07:43:13.051259+00:00",
+    "finished_at_utc": "2026-10-30T07:43:24.962458+00:00",
+    "generation_elapsed_seconds": 11.911191203000271,
+    "token_usage": {
+      "input_tokens": 1354,
+      "output_tokens": 1240,
+      "total_tokens": 2594,
+      "provider_usage": {
+        "prompt_tokens": 1354,
+        "completion_tokens": 1240,
+        "total_tokens": 2594,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 1354,
+          "audio_tokens": 0,
+          "image_tokens": 0
+        },
+        "completion_tokens_details": {
+          "text_tokens": 1240,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "case": {
+    "id": "planar_poiseuille_8",
+    "title": "问题 8",
+    "category": "平面Poiseuille流/静止启动",
+    "solver": null,
+    "standard_case_path": null,
+    "difficulty": "进阶",
+    "input_times": [],
+    "target_times": [
+      "0.05625",
+      "0.140625",
+      "0.28125",
+      "0.703125",
+      "1.40625",
+      "2.8125"
+    ],
+    "fields": [
+      "u"
+    ],
+    "metrics": [
+      "velocity MAE",
+      "velocity RMSE",
+      "velocity max_abs",
+      "velocity relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/planar_poiseuille/planar_poiseuille_8/prompt.md",
+    "notes": "充分发展平面Poiseuille瞬态流；标准答案由Fourier模态解析解生成，不依赖OpenFOAM。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/planar_poiseuille/planar_poiseuille_8/qwen3p8flash_thinking/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/planar_poiseuille/planar_poiseuille_8/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": false,
+  "schema_errors": [
+    "case_id mismatch",
+    "y coordinates are invalid: 'y'",
+    "u row count mismatch"
+  ],
+  "field_results": [],
+  "aggregate": {},
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash_thinking.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash_thinking"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash_thinking",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/planar_poiseuille/planar_poiseuille_8",
+    "started_at_utc": "2026-10-31T12:59:03.561480+00:00",
+    "finished_at_utc": "2026-10-31T13:06:40.878172+00:00",
+    "generation_elapsed_seconds": 457.3167683419997,
+    "token_usage": {
+      "input_tokens": 1147,
+      "output_tokens": 59857,
+      "total_tokens": 61004,
+      "provider_usage": {
+        "input_tokens": 1147,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 59857,
+        "output_tokens_details": {
+          "reasoning_tokens": 59625
+        },
+        "total_tokens": 61004,
+        "x_details": [
+          {
+            "input_tokens": 1147,
+            "output_tokens": 59857,
+            "total_tokens": 61004,
+            "output_tokens_details": {
+              "reasoning_tokens": 59625
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "x_billing_type": "response_api"
+          }
+        ]
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

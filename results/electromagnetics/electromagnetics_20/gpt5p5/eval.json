@@ -1,0 +1,245 @@
+{
+  "case": {
+    "id": "electromagnetics_20",
+    "title": "问题 20",
+    "category": "瞬态静电与空间电荷迁移",
+    "solver": "electrostaticFoam",
+    "standard_case_path": "openfoam_cases/electromagnetics/electromagnetics_20",
+    "difficulty": "高阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "0.001",
+      "0.005",
+      "0.01",
+      "0.02"
+    ],
+    "fields": [
+      "phi",
+      "rho"
+    ],
+    "metrics": [
+      "potential point-sample MAE",
+      "potential point-sample RMSE",
+      "potential max_abs",
+      "potential relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/electromagnetics/electromagnetics_20/prompt.md",
+    "notes": "Transient electrostatic potential coupled to space-charge migration; fine-grid OpenFOAM reference and coarse/fine sensitivity report."
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/electromagnetics/electromagnetics_20/gpt5p5/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/electromagnetics/electromagnetics_20/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 0.001,
+      "field": "phi",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 5974.968827038461,
+        "rmse": 6770.247594109433,
+        "max_abs": 10581.9254362,
+        "relative_l2": 0.18667249317567136,
+        "bias": -5974.968827038465,
+        "centered_rmse": 3183.708529602416,
+        "centered_relative_l2": 0.5432952491086706,
+        "prediction_l2": 112173.63627430466,
+        "reference_l2": 130766.31930541781
+      }
+    },
+    {
+      "time": 0.005,
+      "field": "phi",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 6539.5884804846155,
+        "rmse": 7506.754844441592,
+        "max_abs": 11752.785082900002,
+        "relative_l2": 0.20334913280933997,
+        "bias": -6539.588480484614,
+        "centered_rmse": 3685.803955782268,
+        "centered_relative_l2": 0.685138994842788,
+        "prediction_l2": 112818.01728890647,
+        "reference_l2": 133101.0815243993
+      }
+    },
+    {
+      "time": 0.01,
+      "field": "phi",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 6483.366285807692,
+        "rmse": 7469.794240843233,
+        "max_abs": 11758.0350129,
+        "relative_l2": 0.2022787690823305,
+        "bias": -6465.13311174616,
+        "centered_rmse": 3741.641330744866,
+        "centered_relative_l2": 0.6966196318712466,
+        "prediction_l2": 113173.70200271792,
+        "reference_l2": 133146.5792218849
+      }
+    },
+    {
+      "time": 0.02,
+      "field": "phi",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 6455.690088176923,
+        "rmse": 7451.482611247801,
+        "max_abs": 11748.063391,
+        "relative_l2": 0.20178281771464712,
+        "bias": -6431.303293299989,
+        "centered_rmse": 3763.3669838745395,
+        "centered_relative_l2": 0.7006658128406629,
+        "prediction_l2": 113312.61767782086,
+        "reference_l2": 133146.6322919329
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 6363.403420376922,
+    "rmse": 7299.569822660515,
+    "max_abs": 11460.202230750001,
+    "relative_l2": 0.19852080319549723,
+    "centered_rmse": 3593.6302000010223,
+    "centered_relative_l2": 0.6564299221658421
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/gpt-5.5.json",
+    "model_name": "gpt-5.5",
+    "model_alias": "gpt5p5"
+  },
+  "generation": {
+    "model_name": "gpt-5.5",
+    "model_alias": "gpt5p5",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/electromagnetics/electromagnetics_20",
+    "started_at_utc": "2026-10-31T07:47:41.879075+00:00",
+    "finished_at_utc": "2026-10-31T07:49:27.310392+00:00",
+    "generation_elapsed_seconds": 105.43133134300001,
+    "token_usage": {
+      "input_tokens": 4223,
+      "output_tokens": 3060,
+      "total_tokens": 7283,
+      "provider_usage": {
+        "attribution": {
+          "items": {
+            "msg_0e9f02af76c78830016ae59d2094fc81918412a8cf8d789b7f": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 4197,
+                  "output_tokens": 0
+                }
+              ],
+              "input_tokens": 4197,
+              "output_tokens": 0
+            },
+            "msg_0e9f02af76c78830016ae59d2094fc819194dbb5447f1d9f8f": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 24,
+                  "output_tokens": 0
+                }
+              ],
+              "input_tokens": 24,
+              "output_tokens": 0
+            },
+            "msg_0e9f02af76c78830016ae59d7173048191b19e05099b73ca88": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 686
+                }
+              ],
+              "input_tokens": 0,
+              "output_tokens": 686
+            },
+            "rs_0e9f02af76c78830016ae59d33d7a88191a2a845429b22e8ff": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 2,
+              "output_tokens": 516
+            },
+            "rs_0e9f02af76c78830016ae59d43d9c88191a231aed3bc7e36ea": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_0e9f02af76c78830016ae59d559e608191918eb76b0e86f633": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_0e9f02af76c78830016ae59d67c99c8191abe34ae66307c578": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_0e9f02af76c78830016ae59d713df88191bde696a5ca7d5771": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 304
+            }
+          }
+        },
+        "input_tokens": 4223,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 3060,
+        "output_tokens_details": {
+          "reasoning_tokens": 2374
+        },
+        "total_tokens": 7283
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

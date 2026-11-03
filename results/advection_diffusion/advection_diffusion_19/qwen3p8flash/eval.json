@@ -1,0 +1,184 @@
+{
+  "case": {
+    "id": "advection_diffusion_19",
+    "title": "问题 19",
+    "category": "二维瞬态对流扩散",
+    "solver": "incompressibleFluid+scalarTransport",
+    "standard_case_path": "openfoam_cases/advection_diffusion/advection_diffusion_19",
+    "difficulty": "高级",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "0.5",
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "fields": [
+      "U",
+      "p",
+      "C"
+    ],
+    "metrics": [
+      "C point-sample MAE",
+      "C point-sample RMSE",
+      "C relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/advection_diffusion/advection_diffusion_19/prompt.md",
+    "notes": "参考OpenFOAM 13 pitzDailyScalarTransport、pitzDailyPulse与blockedChannel；后向台阶、时变入口速度和时变标量边界。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/advection_diffusion/advection_diffusion_19/qwen3p8flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/advection_diffusion/advection_diffusion_19/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 0.5,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.16100531796206666,
+        "rmse": 0.19313194405970902,
+        "max_abs": 0.336210430289,
+        "relative_l2": 0.4073226897541585,
+        "bias": -0.13732914725019996,
+        "centered_rmse": 0.13579636641609913,
+        "centered_relative_l2": 1.0848785005661952,
+        "prediction_l2": 1.2940971756402222,
+        "reference_l2": 1.8363740144585916
+      }
+    },
+    {
+      "time": 1.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.12553971568326666,
+        "rmse": 0.14061479895505619,
+        "max_abs": 0.23423906133600003,
+        "relative_l2": 0.3227483529950308,
+        "bias": -0.0533760088602,
+        "centered_rmse": 0.13009044301303122,
+        "centered_relative_l2": 1.359598248105423,
+        "prediction_l2": 1.4742582880893023,
+        "reference_l2": 1.6873789425398606
+      }
+    },
+    {
+      "time": 2.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.10620475902213333,
+        "rmse": 0.12898100358052678,
+        "max_abs": 0.33471968438699995,
+        "relative_l2": 0.26559455077733635,
+        "bias": -0.05212797502626665,
+        "centered_rmse": 0.11797785175320315,
+        "centered_relative_l2": 0.8885565169260445,
+        "prediction_l2": 1.629321177668786,
+        "reference_l2": 1.8808415962693996
+      }
+    },
+    {
+      "time": 3.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.08148642351953334,
+        "rmse": 0.09794619344918255,
+        "max_abs": 0.19336272216300004,
+        "relative_l2": 0.20288590934207706,
+        "bias": -0.03970251054486662,
+        "centered_rmse": 0.0895386367308518,
+        "centered_relative_l2": 1.1432109780541122,
+        "prediction_l2": 1.7087093082206817,
+        "reference_l2": 1.8697403741996628
+      }
+    },
+    {
+      "time": 4.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.16503425878425862,
+        "rmse": 0.21994147100785194,
+        "max_abs": 0.54116901646588,
+        "relative_l2": 0.47477225473858375,
+        "bias": 0.02934372234945848,
+        "centered_rmse": 0.2179752202149952,
+        "centered_relative_l2": 1.246595462801145,
+        "prediction_l2": 1.7891164020264305,
+        "reference_l2": 1.7941858351069848
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 0.12785409499425174,
+    "rmse": 0.15612308221046528,
+    "max_abs": 0.327940182928176,
+    "relative_l2": 0.33466475152143726,
+    "centered_rmse": 0.13827570362563607,
+    "centered_relative_l2": 1.144567941290584
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/advection_diffusion/advection_diffusion_19",
+    "started_at_utc": "2026-10-31T08:26:59.085390+00:00",
+    "finished_at_utc": "2026-10-31T08:27:48.233363+00:00",
+    "generation_elapsed_seconds": 49.14798783900005,
+    "token_usage": {
+      "input_tokens": 21797,
+      "output_tokens": 1811,
+      "total_tokens": 23608,
+      "provider_usage": {
+        "prompt_tokens": 21797,
+        "total_tokens": 23608,
+        "completion_tokens": 1811,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 21797
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "case": {
+    "id": "chemical_reaction_5",
+    "title": "问题 5",
+    "category": "化学反应",
+    "solver": "foamRun",
+    "standard_case_path": "openfoam_cases/chemical_reaction/chemical_reaction_5",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "1",
+      "2.5",
+      "5"
+    ],
+    "fields": [
+      "alpha.gas"
+    ],
+    "metrics": [
+      "scalar MAE",
+      "scalar RMSE",
+      "relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/chemical_reaction/chemical_reaction_5/prompt.md",
+    "notes": "OpenFOAM 13 bubbleColumnEvaporatingReacting prototype; only initial state varied; alpha.gas (气相体积分数, 1) scored."
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/chemical_reaction/chemical_reaction_5/gpt5p5/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/chemical_reaction/chemical_reaction_5/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 1.0,
+      "field": "alpha.gas",
+      "metrics": {
+        "cells": 9,
+        "components": 1,
+        "mae": 0.023247112745555562,
+        "rmse": 0.02619586307043554,
+        "max_abs": 0.03942377719,
+        "relative_l2": 0.045299654725712915,
+        "bias": 0.016580446078888866,
+        "centered_rmse": 0.02028082961394994,
+        "centered_relative_l2": 0.044820730131925564,
+        "prediction_l2": 1.7234558305915473,
+        "reference_l2": 1.7348385917541853,
+        "boundedness_violation_fraction": 0.0,
+        "liquid_volume_abs_error": 0.14922401470999969,
+        "liquid_volume_relative_error": 0.046045766627293254,
+        "interface_cell_count_error": 3
+      }
+    },
+    {
+      "time": 2.5,
+      "field": "alpha.gas",
+      "metrics": {
+        "cells": 9,
+        "components": 1,
+        "mae": 0.40963603791111114,
+        "rmse": 0.5073196337206473,
+        "max_abs": 0.8477344064,
+        "relative_l2": 1.6490493392137182,
+        "bias": 0.13370106628888895,
+        "centered_rmse": 0.48938454780639107,
+        "centered_relative_l2": 4.191952992338324,
+        "prediction_l2": 1.7527335792983485,
+        "reference_l2": 0.9229310882157266,
+        "boundedness_violation_fraction": 0.0,
+        "liquid_volume_abs_error": 1.2033095966000005,
+        "liquid_volume_relative_error": 0.4697326402140203,
+        "interface_cell_count_error": 0
+      }
+    },
+    {
+      "time": 5.0,
+      "field": "alpha.gas",
+      "metrics": {
+        "cells": 9,
+        "components": 1,
+        "mae": 0.296118103,
+        "rmse": 0.36530049084596933,
+        "max_abs": 0.6122929427,
+        "relative_l2": 0.9555782068025562,
+        "bias": 0.09367319162222221,
+        "centered_rmse": 0.3530860826818477,
+        "centered_relative_l2": 5.253131800980965,
+        "prediction_l2": 1.7903910187442296,
+        "reference_l2": 1.146846448293212,
+        "boundedness_violation_fraction": 0.0,
+        "liquid_volume_abs_error": 0.8430587246000001,
+        "liquid_volume_relative_error": 0.24891447948132323,
+        "interface_cell_count_error": 0
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 0.2430004178855556,
+    "rmse": 0.29960532921235067,
+    "max_abs": 0.4998170420966666,
+    "relative_l2": 0.8833090669139958,
+    "centered_rmse": 0.2875838200340629,
+    "centered_relative_l2": 3.1633018411504046
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/gpt-5.5.json",
+    "model_name": "gpt-5.5",
+    "model_alias": "gpt5p5"
+  },
+  "generation": {
+    "model_name": "gpt-5.5",
+    "model_alias": "gpt5p5",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/chemical_reaction/chemical_reaction_5",
+    "started_at_utc": "2026-10-31T07:48:25.641722+00:00",
+    "finished_at_utc": "2026-10-31T07:48:47.579544+00:00",
+    "generation_elapsed_seconds": 21.93783061199997,
+    "token_usage": {
+      "input_tokens": 22895,
+      "output_tokens": 1807,
+      "total_tokens": 24702,
+      "provider_usage": {
+        "attribution": {
+          "items": {
+            "msg_0629d8b01df7961f016ae59d4c7fd081918c27718e284a7b01": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 24,
+                  "output_tokens": 0
+                }
+              ],
+              "input_tokens": 24,
+              "output_tokens": 0
+            },
+            "msg_0629d8b01df7961f016ae59d4c7fd08191b9e9cb970af87260": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 22869,
+                  "output_tokens": 0
+                }
+              ],
+              "input_tokens": 22869,
+              "output_tokens": 0
+            },
+            "msg_0629d8b01df7961f016ae59d592b708191a192f7cd901d7368": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 318
+                }
+              ],
+              "input_tokens": 0,
+              "output_tokens": 318
+            },
+            "rs_0629d8b01df7961f016ae59d51cfbc8191b2e814651b1dc3c6": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 2,
+              "output_tokens": 516
+            },
+            "rs_0629d8b01df7961f016ae59d558f2081919cdb644e2946aecb": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_0629d8b01df7961f016ae59d59217c8191be78306916842a39": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 455
+            }
+          }
+        },
+        "input_tokens": 22895,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 1807,
+        "output_tokens_details": {
+          "reasoning_tokens": 1489
+        },
+        "total_tokens": 24702
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

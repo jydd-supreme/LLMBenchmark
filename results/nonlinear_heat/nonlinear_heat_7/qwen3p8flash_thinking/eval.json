@@ -1,0 +1,200 @@
+{
+  "case": {
+    "id": "nonlinear_heat_7",
+    "title": "问题 7",
+    "category": "二维非线性瞬态导热",
+    "solver": "solid",
+    "standard_case_path": "openfoam_cases/nonlinear_heat/nonlinear_heat_7",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "50",
+      "150",
+      "300",
+      "600",
+      "1000"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/nonlinear_heat/nonlinear_heat_7/prompt.md",
+    "notes": "模型输入包含 blockMeshDict、求解配置、材料模型和 0/T；不包含派生 polyMesh、目标时间场、postProcessing 或 reference_answer.json。标准答案来自 OpenFOAM 13 polynomialSolid 数值解。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/nonlinear_heat/nonlinear_heat_7/qwen3p8flash_thinking/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/nonlinear_heat/nonlinear_heat_7/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 50.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 2.3574727721000017,
+        "rmse": 4.269955477750265,
+        "max_abs": 10.491907966999975,
+        "relative_l2": 0.012551053589369724,
+        "bias": -0.7891439042998627,
+        "centered_rmse": 4.196399847521164,
+        "centered_relative_l2": 0.06308571575598941,
+        "prediction_l2": 1514.6641455065212,
+        "reference_l2": 1521.4516679673663
+      }
+    },
+    {
+      "time": 150.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 3.1839767166500024,
+        "rmse": 4.661166288230589,
+        "max_abs": 8.355587151999998,
+        "relative_l2": 0.012562245264939159,
+        "bias": -1.8021194944499257,
+        "centered_rmse": 4.298701721945898,
+        "centered_relative_l2": 0.051761533349364945,
+        "prediction_l2": 1647.7805094271505,
+        "reference_l2": 1659.3665312367957
+      }
+    },
+    {
+      "time": 300.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 5.278926896600012,
+        "rmse": 6.459687030053572,
+        "max_abs": 11.445342541000002,
+        "relative_l2": 0.016146204530570998,
+        "bias": -4.233058038900026,
+        "centered_rmse": 4.879423753430967,
+        "centered_relative_l2": 0.05537629667262214,
+        "prediction_l2": 1767.5130393397383,
+        "reference_l2": 1789.1882002640161
+      }
+    },
+    {
+      "time": 600.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 12.770552613799989,
+        "rmse": 16.79871633740249,
+        "max_abs": 44.52894703499999,
+        "relative_l2": 0.03821656057605511,
+        "bias": -12.046497255500071,
+        "centered_rmse": 11.708064505192322,
+        "centered_relative_l2": 0.1365548719110711,
+        "prediction_l2": 1911.3656600451939,
+        "reference_l2": 1965.8007470564319
+      }
+    },
+    {
+      "time": 1000.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 23.141909215049992,
+        "rmse": 28.275063663584742,
+        "max_abs": 64.42986475700002,
+        "relative_l2": 0.05962849510664637,
+        "bias": -22.029405217550106,
+        "centered_rmse": 17.725251223628717,
+        "centered_relative_l2": 0.2263348085532108,
+        "prediction_l2": 2023.8003703922973,
+        "reference_l2": 2120.6292161769647
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 9.34656764284,
+    "rmse": 12.092917759404333,
+    "max_abs": 27.850329890399998,
+    "relative_l2": 0.02782091181351627,
+    "centered_rmse": 8.561568210343813,
+    "centered_relative_l2": 0.10662264524845169
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash_thinking.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash_thinking"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash_thinking",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/nonlinear_heat/nonlinear_heat_7",
+    "started_at_utc": "2026-10-31T13:06:41.073048+00:00",
+    "finished_at_utc": "2026-10-31T13:12:38.412492+00:00",
+    "generation_elapsed_seconds": 357.33950321799784,
+    "token_usage": {
+      "input_tokens": 7941,
+      "output_tokens": 41194,
+      "total_tokens": 49135,
+      "provider_usage": {
+        "input_tokens": 7941,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 41194,
+        "output_tokens_details": {
+          "reasoning_tokens": 39849
+        },
+        "total_tokens": 49135,
+        "x_details": [
+          {
+            "input_tokens": 7941,
+            "output_tokens": 41194,
+            "total_tokens": 49135,
+            "output_tokens_details": {
+              "reasoning_tokens": 39849
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "x_billing_type": "response_api"
+          }
+        ]
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "case": {
+    "id": "solid_mechanics_1",
+    "title": "问题 1",
+    "category": "固体力学",
+    "solver": "foamRun",
+    "standard_case_path": "openfoam_cases/solid_mechanics/solid_mechanics_1",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "6000"
+    ],
+    "fields": [
+      "D"
+    ],
+    "metrics": [
+      "scalar MAE",
+      "scalar RMSE",
+      "relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/solid_mechanics/solid_mechanics_1/prompt.md",
+    "notes": "Supplied OpenFOAM 13 solid_mechanics/beamEndLoad prototype; D scored."
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/solid_mechanics/solid_mechanics_1/deepseekv4flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/solid_mechanics/solid_mechanics_1/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 6000.0,
+      "field": "D",
+      "metrics": {
+        "cells": 6,
+        "components": 1,
+        "mae": 0.00015498699999999996,
+        "rmse": 0.00020256062661316154,
+        "max_abs": 0.0003725174999999999,
+        "relative_l2": 0.14893181582020062,
+        "bias": 0.00015498699999999988,
+        "centered_rmse": 0.00013042176691379644,
+        "centered_relative_l2": 0.15204108640587258,
+        "prediction_l2": 0.003827584564198092,
+        "reference_l2": 0.0033315257351033624
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 0.00015498699999999996,
+    "rmse": 0.00020256062661316154,
+    "max_abs": 0.0003725174999999999,
+    "relative_l2": 0.14893181582020062,
+    "centered_rmse": 0.00013042176691379644,
+    "centered_relative_l2": 0.15204108640587258
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/deepseekv4flash.json",
+    "model_name": "deepseek-v4-flash-0731",
+    "model_alias": "deepseekv4flash"
+  },
+  "generation": {
+    "model_name": "deepseek-v4-flash-0731",
+    "model_alias": "deepseekv4flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/solid_mechanics/solid_mechanics_1",
+    "started_at_utc": "2026-10-28T12:25:15.836639+00:00",
+    "finished_at_utc": "2026-10-28T12:41:35.670688+00:00",
+    "generation_elapsed_seconds": 979.834071121004,
+    "token_usage": {
+      "input_tokens": 3137,
+      "output_tokens": 42804,
+      "total_tokens": 45941,
+      "provider_usage": {
+        "billing_usage": {
+          "estimated": true,
+          "openai_usage": {
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "cached_tokens": 0,
+            "completion_thinking_tokens": 42553,
+            "completion_tokens": 42804,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": 0,
+              "audio_tokens": 0,
+              "cached_tokens": 0,
+              "reasoning_tokens": 42553,
+              "rejected_prediction_tokens": 0
+            },
+            "credit": 5.64,
+            "input_tokens": 3137,
+            "output_tokens": 42804,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 3137,
+            "prompt_cache_write_tokens": 0,
+            "prompt_tokens": 3137,
+            "prompt_tokens_details": {
+              "accepted_prediction_tokens": 0,
+              "audio_tokens": 0,
+              "cache_write_tokens": 3136,
+              "cached_tokens": 0,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": 0
+            },
+            "total_tokens": 45941
+          },
+          "semantic": "openai",
+          "source": "oai_chat"
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_write_accounting": {
+          "accounting_quantum_tokens": 64,
+          "cache_write_tokens": 3136,
+          "method": "observed_model_quantum_estimate_v1",
+          "source": "estimated",
+          "uncached_input_tokens": 1
+        },
+        "cached_tokens": 0,
+        "completion_thinking_tokens": 42553,
+        "completion_tokens": 42804,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "cached_tokens": 0,
+          "reasoning_tokens": 42553,
+          "rejected_prediction_tokens": 0
+        },
+        "credit": 5.64,
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3137,
+        "prompt_cache_write_tokens": 0,
+        "prompt_tokens": 3137,
+        "prompt_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "cached_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        },
+        "total_tokens": 45941
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

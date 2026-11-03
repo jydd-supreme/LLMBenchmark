@@ -1,0 +1,181 @@
+{
+  "case": {
+    "id": "heat_conduction_42",
+    "title": "问题 42",
+    "category": "一维传热/无限域高斯温度脉冲",
+    "solver": null,
+    "standard_case_path": null,
+    "difficulty": "进阶",
+    "input_times": [],
+    "target_times": [
+      "2",
+      "8",
+      "20",
+      "50",
+      "100"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/heat_conduction/heat_conduction_42/prompt.md",
+    "notes": "一维常物性热传导定量预测；标准答案由对应构型的闭式解或收敛Fourier级数生成，不依赖OpenFOAM。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/heat_conduction/heat_conduction_42/qwen3p8flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/heat_conduction/heat_conduction_42/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 2.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 41.531664669041774,
+        "rmse": 53.84279938497998,
+        "max_abs": 98.44163206394728,
+        "relative_l2": 0.15686343608624426,
+        "bias": -41.53166466904173,
+        "centered_rmse": 34.26613306793559,
+        "centered_relative_l2": 1.0,
+        "prediction_l2": 1081.6653826391969,
+        "reference_l2": 1237.592257575762
+      }
+    },
+    {
+      "time": 8.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 37.829327339302935,
+        "rmse": 40.22764142995439,
+        "max_abs": 55.886686483442986,
+        "relative_l2": 0.11897927748809559,
+        "bias": -37.82932733930289,
+        "centered_rmse": 13.68229250063199,
+        "centered_relative_l2": 1.0,
+        "prediction_l2": 1081.6653826391969,
+        "reference_l2": 1219.0595448958939
+      }
+    },
+    {
+      "time": 20.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 30.295484669280427,
+        "rmse": 30.714310079927394,
+        "max_abs": 36.414626715521536,
+        "relative_l2": 0.09297951427320225,
+        "bias": -30.29548466928037,
+        "centered_rmse": 5.0549433566879864,
+        "centered_relative_l2": 1.0,
+        "prediction_l2": 1081.6653826391969,
+        "reference_l2": 1191.0367649188267
+      }
+    },
+    {
+      "time": 50.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 21.547290319970077,
+        "rmse": 21.6011525101997,
+        "max_abs": 23.318719131184878,
+        "relative_l2": 0.06717801825187138,
+        "bias": -21.547290319970102,
+        "centered_rmse": 1.52448995924232,
+        "centered_relative_l2": 1.0,
+        "prediction_l2": 1081.6653826391969,
+        "reference_l2": 1159.3682727083583
+      }
+    },
+    {
+      "time": 100.0,
+      "field": "T",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 15.901596557930121,
+        "rmse": 15.911937254777508,
+        "max_abs": 16.558445048009105,
+        "relative_l2": 0.050369834154263445,
+        "bias": -15.901596557930134,
+        "centered_rmse": 0.5735626459256574,
+        "centered_relative_l2": 1.0,
+        "prediction_l2": 1081.6653826391969,
+        "reference_l2": 1139.0012817663792
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 29.42107271110507,
+    "rmse": 32.4595681319678,
+    "max_abs": 46.124021888421154,
+    "relative_l2": 0.09727401605073539,
+    "centered_rmse": 11.020284306084708,
+    "centered_relative_l2": 1.0
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/heat_conduction/heat_conduction_42",
+    "started_at_utc": "2026-10-31T08:21:30.033946+00:00",
+    "finished_at_utc": "2026-10-31T08:23:01.883961+00:00",
+    "generation_elapsed_seconds": 91.8500346869996,
+    "token_usage": {
+      "input_tokens": 940,
+      "output_tokens": 1076,
+      "total_tokens": 2016,
+      "provider_usage": {
+        "prompt_tokens": 940,
+        "total_tokens": 2016,
+        "completion_tokens": 1076,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 940
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

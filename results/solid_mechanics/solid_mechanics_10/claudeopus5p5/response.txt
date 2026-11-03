@@ -1,0 +1,34 @@
+Looking at this problem, I need to predict the vertical displacement Dy at six probe locations along a cantilever beam.
+
+**Setup:**
+- Cantilever: L=30 m, h=1 m, fixed at x=0, free at x=30
+- Plane stress, E=2×10¹¹ Pa, ν=0
+- Right end: uniform upward traction σ_xy=28000 Pa over face area 1 m² → total shear force P=28000 N, no applied moment (uniform distribution, resultant at centroid)
+- Probes at mid-height y=0.5 (neutral axis), so Dy equals the beam deflection w(x)
+
+**Analysis:**
+
+With ν=0, plane stress gives simple Hooke's law (σ=Eε, no coupling). The classical 2D Airy stress function solution for a cantilever with end load yields the centerline deflection exactly equal to the Euler-Bernoulli result:
+
+w(x) = P/(6EI) × (3Lx² − x³)
+
+where I = bh³/12 = 1×1³/12 = 1/12 m⁴, so 6EI = 6×2×10¹¹×(1/12) = 10¹¹
+
+P/(6EI) = 28000/10¹¹ = 2.8×10⁻⁷
+
+The Saint-Venant corrections from the actual BCs (displacement condition at fixed end vs. stress condition; uniform vs. parabolic shear at free end) decay as exp(−πd/h) where d is distance from the boundary. At the nearest probes (2.5h from each end), corrections are ~10⁻⁹ m — negligible. The fine mesh (240×40, cubic interpolation) with probes landing exactly on grid points means negligible discretization error.
+
+**Computing w(x) = 2.8×10⁻⁷ × (90x² − x³):**
+
+| x | 90x² | x³ | 90x²−x³ | w(x) |
+|---|---|---|---|---|
+| 2.5 | 562.5 | 15.625 | 546.875 | 1.53125e-4 |
+| 7.5 | 5062.5 | 421.875 | 4640.625 | 1.299375e-3 |
+| 12.5 | 14062.5 | 1953.125 | 12109.375 | 3.390625e-3 |
+| 17.5 | 27562.5 | 5359.375 | 22203.125 | 6.216875e-3 |
+| 22.5 | 45562.5 | 11390.625 | 34171.875 | 9.568125e-3 |
+| 27.5 | 68062.5 | 20796.875 | 47265.625 | 1.3234375e-2 |
+
+Tip check: w(30) = 2.8e-7 × 54000 = 0.01512 m = PL³/(3EI) ✓
+
+{"case_id":"solid_mechanics_10","points":[{"x":2.5,"y":0.5,"z":0.5},{"x":7.5,"y":0.5,"z":0.5},{"x":12.5,"y":0.5,"z":0.5},{"x":17.5,"y":0.5,"z":0.5},{"x":22.5,"y":0.5,"z":0.5},{"x":27.5,"y":0.5,"z":0.5}],"scalar_by_time":[{"time":6000.0,"values":[0.000153125,0.001299375,0.003390625,0.006216875,0.009568125,0.013234375]}]}

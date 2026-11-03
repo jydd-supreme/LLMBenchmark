@@ -1,0 +1,191 @@
+{
+  "case": {
+    "id": "advection_diffusion_8",
+    "title": "问题 8",
+    "category": "二维瞬态对流扩散",
+    "solver": "incompressibleFluid+scalarTransport",
+    "standard_case_path": "openfoam_cases/advection_diffusion/advection_diffusion_8",
+    "difficulty": "高级",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "0.5",
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "fields": [
+      "U",
+      "p",
+      "C"
+    ],
+    "metrics": [
+      "C point-sample MAE",
+      "C point-sample RMSE",
+      "C relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/advection_diffusion/advection_diffusion_8/prompt.md",
+    "notes": "参考OpenFOAM 13 pitzDailyScalarTransport、pitzDailyPulse与blockedChannel；后向台阶、时变入口速度和时变标量边界。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/advection_diffusion/advection_diffusion_8/claudeopus5p5/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/advection_diffusion/advection_diffusion_8/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 0.5,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.015765868286406654,
+        "rmse": 0.03166442921667222,
+        "max_abs": 0.08895848193199996,
+        "relative_l2": 0.08496175516346145,
+        "bias": 0.010037958651566509,
+        "centered_rmse": 0.03003124146163596,
+        "centered_relative_l2": 0.101223856463916,
+        "prediction_l2": 1.5355064311164572,
+        "reference_l2": 1.4434236532353995
+      }
+    },
+    {
+      "time": 1.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.036220971364839996,
+        "rmse": 0.05787371292639843,
+        "max_abs": 0.130770133377,
+        "relative_l2": 0.37505903761673876,
+        "bias": -0.03622097136477327,
+        "centered_rmse": 0.045137654804823964,
+        "centered_relative_l2": 0.4516460076584522,
+        "prediction_l2": 0.3967619437395679,
+        "reference_l2": 0.59762305095065
+      }
+    },
+    {
+      "time": 2.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.07554977694552667,
+        "rmse": 0.13569586352985097,
+        "max_abs": 0.41414805725900006,
+        "relative_l2": 0.4349889047979789,
+        "bias": 0.006374418338473298,
+        "centered_rmse": 0.13554605921958066,
+        "centered_relative_l2": 0.7387724826595374,
+        "prediction_l2": 1.3180660074518271,
+        "reference_l2": 1.2081867233933847
+      }
+    },
+    {
+      "time": 3.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.05066035213946,
+        "rmse": 0.08103691481737288,
+        "max_abs": 0.212467300782,
+        "relative_l2": 0.2622473384198074,
+        "bias": -0.04628456976708667,
+        "centered_rmse": 0.06651857007327978,
+        "centered_relative_l2": 0.4227617039249688,
+        "prediction_l2": 0.9958559132725978,
+        "reference_l2": 1.19678858670929
+      }
+    },
+    {
+      "time": 4.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.08974715650806667,
+        "rmse": 0.1161609081418576,
+        "max_abs": 0.284884979283,
+        "relative_l2": 0.26728108406364465,
+        "bias": 0.022489105886733363,
+        "centered_rmse": 0.11396313744696739,
+        "centered_relative_l2": 0.48860364492660313,
+        "prediction_l2": 1.8500459453754114,
+        "reference_l2": 1.6832065175499549
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 0.05358882504886,
+    "rmse": 0.08448636572643041,
+    "max_abs": 0.2262457905266,
+    "relative_l2": 0.2849076240123262,
+    "centered_rmse": 0.07823933260125755,
+    "centered_relative_l2": 0.4406015391266955
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/claude-opus-5.5.json",
+    "model_name": "claude-opus-5-5",
+    "model_alias": "claudeopus5p5"
+  },
+  "generation": {
+    "model_name": "claude-opus-5-5",
+    "model_alias": "claudeopus5p5",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/advection_diffusion/advection_diffusion_8",
+    "started_at_utc": "2026-10-30T05:18:03.866599+00:00",
+    "finished_at_utc": "2026-10-30T05:21:14.871514+00:00",
+    "generation_elapsed_seconds": 191.00494389900007,
+    "token_usage": {
+      "input_tokens": 15033,
+      "output_tokens": 19201,
+      "total_tokens": 34234,
+      "provider_usage": {
+        "prompt_tokens": 15033,
+        "completion_tokens": 19201,
+        "total_tokens": 34234,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "image_tokens": 0
+        },
+        "completion_tokens_details": {
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

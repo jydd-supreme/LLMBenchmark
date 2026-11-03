@@ -1,0 +1,226 @@
+{
+  "case": {
+    "id": "electromagnetics_8",
+    "title": "问题 8",
+    "category": "瞬态静电与空间电荷迁移",
+    "solver": "electrostaticFoam",
+    "standard_case_path": "openfoam_cases/electromagnetics/electromagnetics_8",
+    "difficulty": "高阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "0.001",
+      "0.005",
+      "0.01",
+      "0.02"
+    ],
+    "fields": [
+      "phi",
+      "rho"
+    ],
+    "metrics": [
+      "potential point-sample MAE",
+      "potential point-sample RMSE",
+      "potential max_abs",
+      "potential relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/electromagnetics/electromagnetics_8/prompt.md",
+    "notes": "Transient electrostatic potential coupled to space-charge migration; fine-grid OpenFOAM reference and coarse/fine sensitivity report."
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/electromagnetics/electromagnetics_8/deepseekv4flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/electromagnetics/electromagnetics_8/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 0.001,
+      "field": "phi",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 364.9056878538465,
+        "rmse": 419.55735603480025,
+        "max_abs": 623.498472700001,
+        "relative_l2": 0.012550255538714616,
+        "bias": -364.9056878538504,
+        "centered_rmse": 207.05606481053215,
+        "centered_relative_l2": 0.026235360190732825,
+        "prediction_l2": 119340.11356140902,
+        "reference_l2": 120534.2437462836
+      }
+    },
+    {
+      "time": 0.005,
+      "field": "phi",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 284.6557347153847,
+        "rmse": 382.8716559301439,
+        "max_abs": 948.2369608000008,
+        "relative_l2": 0.010922032195651287,
+        "bias": 283.1094099461552,
+        "centered_rmse": 257.75912576401856,
+        "centered_relative_l2": 0.03794259751749908,
+        "prediction_l2": 127224.37115584419,
+        "reference_l2": 126392.53965279328
+      }
+    },
+    {
+      "time": 0.01,
+      "field": "phi",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 283.32386549230824,
+        "rmse": 381.3276721149482,
+        "max_abs": 944.9828395000004,
+        "relative_l2": 0.010877627017915645,
+        "bias": 281.7592985538431,
+        "centered_rmse": 256.9484212814895,
+        "centered_relative_l2": 0.03782793280146842,
+        "prediction_l2": 127224.37115584419,
+        "reference_l2": 126396.72901996788
+      }
+    },
+    {
+      "time": 0.02,
+      "field": "phi",
+      "metrics": {
+        "cells": 13,
+        "components": 1,
+        "mae": 283.32385130769313,
+        "rmse": 381.3276650284222,
+        "max_abs": 944.9828596000007,
+        "relative_l2": 0.010877626812365373,
+        "bias": 281.75928703077807,
+        "centered_rmse": 256.94842340037957,
+        "centered_relative_l2": 0.037827933123171814,
+        "prediction_l2": 127224.37115584419,
+        "reference_l2": 126396.72905950312
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 304.0522848423081,
+    "rmse": 391.2710872770786,
+    "max_abs": 865.4252831500007,
+    "relative_l2": 0.01130688539116173,
+    "centered_rmse": 244.67800881410494,
+    "centered_relative_l2": 0.034958455908218035
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/deepseekv4flash.json",
+    "model_name": "deepseek-v4-flash-0731",
+    "model_alias": "deepseekv4flash"
+  },
+  "generation": {
+    "model_name": "deepseek-v4-flash-0731",
+    "model_alias": "deepseekv4flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/electromagnetics/electromagnetics_8",
+    "started_at_utc": "2026-10-28T08:08:00.752954+00:00",
+    "finished_at_utc": "2026-10-28T08:17:20.281290+00:00",
+    "generation_elapsed_seconds": 559.5284680670011,
+    "token_usage": {
+      "input_tokens": 4207,
+      "output_tokens": 86788,
+      "total_tokens": 90995,
+      "provider_usage": {
+        "billing_usage": {
+          "estimated": true,
+          "openai_usage": {
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "cached_tokens": 0,
+            "completion_thinking_tokens": 86054,
+            "completion_tokens": 86788,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": 0,
+              "audio_tokens": 0,
+              "cached_tokens": 0,
+              "reasoning_tokens": 86054,
+              "rejected_prediction_tokens": 0
+            },
+            "credit": 22.68,
+            "input_tokens": 4207,
+            "output_tokens": 86788,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 4207,
+            "prompt_cache_write_tokens": 0,
+            "prompt_tokens": 4207,
+            "prompt_tokens_details": {
+              "accepted_prediction_tokens": 0,
+              "audio_tokens": 0,
+              "cache_write_tokens": 4160,
+              "cached_tokens": 0,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": 0
+            },
+            "total_tokens": 90995
+          },
+          "semantic": "openai",
+          "source": "oai_chat"
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_write_accounting": {
+          "accounting_quantum_tokens": 64,
+          "cache_write_tokens": 4160,
+          "method": "observed_model_quantum_estimate_v1",
+          "source": "estimated",
+          "uncached_input_tokens": 47
+        },
+        "cached_tokens": 0,
+        "completion_thinking_tokens": 86054,
+        "completion_tokens": 86788,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "cached_tokens": 0,
+          "reasoning_tokens": 86054,
+          "rejected_prediction_tokens": 0
+        },
+        "credit": 22.68,
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 4207,
+        "prompt_cache_write_tokens": 0,
+        "prompt_tokens": 4207,
+        "prompt_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "cached_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        },
+        "total_tokens": 90995
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

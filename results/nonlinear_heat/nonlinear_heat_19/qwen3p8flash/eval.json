@@ -1,0 +1,183 @@
+{
+  "case": {
+    "id": "nonlinear_heat_19",
+    "title": "问题 19",
+    "category": "二维非线性瞬态导热",
+    "solver": "solid",
+    "standard_case_path": "openfoam_cases/nonlinear_heat/nonlinear_heat_19",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "50",
+      "150",
+      "300",
+      "600",
+      "1000"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/nonlinear_heat/nonlinear_heat_19/prompt.md",
+    "notes": "模型输入包含 blockMeshDict、求解配置、材料模型和 0/T；不包含派生 polyMesh、目标时间场、postProcessing 或 reference_answer.json。标准答案来自 OpenFOAM 13 polynomialSolid 数值解。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/nonlinear_heat/nonlinear_heat_19/qwen3p8flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/nonlinear_heat/nonlinear_heat_19/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 50.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 54.94737697285001,
+        "rmse": 58.28381963512235,
+        "max_abs": 78.46280432600003,
+        "relative_l2": 0.1697121426900261,
+        "bias": 36.61254626095007,
+        "centered_rmse": 45.348925980107495,
+        "centered_relative_l2": 0.6912385889630109,
+        "prediction_l2": 1678.7537064441588,
+        "reference_l2": 1535.8545431897348
+      }
+    },
+    {
+      "time": 150.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 55.946820212800006,
+        "rmse": 65.5053318792813,
+        "max_abs": 105.16125222599999,
+        "relative_l2": 0.16897894061087243,
+        "bias": 38.150185428600025,
+        "centered_rmse": 53.24952447091169,
+        "centered_relative_l2": 0.61465213508692,
+        "prediction_l2": 1870.9871191699851,
+        "reference_l2": 1733.640587889123
+      }
+    },
+    {
+      "time": 300.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 62.74739895694999,
+        "rmse": 70.20568432605079,
+        "max_abs": 108.009464777,
+        "relative_l2": 0.1643492062950515,
+        "bias": 36.76546421554997,
+        "centered_rmse": 59.80918618995083,
+        "centered_relative_l2": 0.5999618387025669,
+        "prediction_l2": 2033.2810133132116,
+        "reference_l2": 1910.3795643297585
+      }
+    },
+    {
+      "time": 600.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 59.859496981650025,
+        "rmse": 67.30713865145641,
+        "max_abs": 108.64165758000001,
+        "relative_l2": 0.1445786120478947,
+        "bias": 32.24338865505018,
+        "centered_rmse": 59.08142518157268,
+        "centered_relative_l2": 0.5817901345913772,
+        "prediction_l2": 2186.1931489463595,
+        "reference_l2": 2081.9585312632917
+      }
+    },
+    {
+      "time": 1000.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 51.16854402580001,
+        "rmse": 60.17759131201377,
+        "max_abs": 114.57995218600001,
+        "relative_l2": 0.122993509745278,
+        "bias": 27.477221557399957,
+        "centered_rmse": 53.53825540304156,
+        "centered_relative_l2": 0.5675347701129632,
+        "prediction_l2": 2278.1328039207897,
+        "reference_l2": 2188.1022043283815
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 56.93392743001001,
+    "rmse": 64.29591316078492,
+    "max_abs": 102.97102621900001,
+    "relative_l2": 0.15412248227782455,
+    "centered_rmse": 54.20546344511685,
+    "centered_relative_l2": 0.6110354934913677
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/nonlinear_heat/nonlinear_heat_19",
+    "started_at_utc": "2026-10-31T08:24:34.221589+00:00",
+    "finished_at_utc": "2026-10-31T08:27:54.709502+00:00",
+    "generation_elapsed_seconds": 200.48791777199995,
+    "token_usage": {
+      "input_tokens": 8397,
+      "output_tokens": 1043,
+      "total_tokens": 9440,
+      "provider_usage": {
+        "completion_tokens": 1043,
+        "prompt_tokens": 8397,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 8397
+        },
+        "total_tokens": 9440
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

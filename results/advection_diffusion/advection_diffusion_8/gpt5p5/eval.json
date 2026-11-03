@@ -1,0 +1,263 @@
+{
+  "case": {
+    "id": "advection_diffusion_8",
+    "title": "问题 8",
+    "category": "二维瞬态对流扩散",
+    "solver": "incompressibleFluid+scalarTransport",
+    "standard_case_path": "openfoam_cases/advection_diffusion/advection_diffusion_8",
+    "difficulty": "高级",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "0.5",
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "fields": [
+      "U",
+      "p",
+      "C"
+    ],
+    "metrics": [
+      "C point-sample MAE",
+      "C point-sample RMSE",
+      "C relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/advection_diffusion/advection_diffusion_8/prompt.md",
+    "notes": "参考OpenFOAM 13 pitzDailyScalarTransport、pitzDailyPulse与blockedChannel；后向台阶、时变入口速度和时变标量边界。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/advection_diffusion/advection_diffusion_8/gpt5p5/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/advection_diffusion/advection_diffusion_8/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 0.5,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.09210079838061998,
+        "rmse": 0.14502972770733516,
+        "max_abs": 0.3976974732074,
+        "relative_l2": 0.389142660130637,
+        "bias": 0.04643795865156661,
+        "centered_rmse": 0.13739409708986466,
+        "centered_relative_l2": 0.46310307819209884,
+        "prediction_l2": 1.4188727920430357,
+        "reference_l2": 1.4434236532353995
+      }
+    },
+    {
+      "time": 1.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.14015916587669333,
+        "rmse": 0.23746604681547456,
+        "max_abs": 0.5498978768018,
+        "relative_l2": 1.5389333512873318,
+        "bias": 0.13776569530189345,
+        "centered_rmse": 0.19341855285405027,
+        "centered_relative_l2": 1.9353401850702956,
+        "prediction_l2": 1.283627671873741,
+        "reference_l2": 0.59762305095065
+      }
+    },
+    {
+      "time": 2.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.14100329735567338,
+        "rmse": 0.16818001844315175,
+        "max_abs": 0.317567212765,
+        "relative_l2": 0.5391206491375267,
+        "bias": -0.021625581661526644,
+        "centered_rmse": 0.16678385060112838,
+        "centered_relative_l2": 0.9090291527878931,
+        "prediction_l2": 0.9991996797437437,
+        "reference_l2": 1.2081867233933847
+      }
+    },
+    {
+      "time": 3.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.10727684779158003,
+        "rmse": 0.1369885162371689,
+        "max_abs": 0.33246730078200004,
+        "relative_l2": 0.4433149245407163,
+        "bias": -0.01061790310041999,
+        "centered_rmse": 0.13657640248085015,
+        "centered_relative_l2": 0.8680173456094805,
+        "prediction_l2": 1.0951255635770722,
+        "reference_l2": 1.19678858670929
+      }
+    },
+    {
+      "time": 4.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.0875170425103333,
+        "rmse": 0.10489158223210866,
+        "max_abs": 0.242431706907,
+        "relative_l2": 0.2413508662820669,
+        "bias": 0.0006224392200667173,
+        "centered_rmse": 0.10488973540138488,
+        "centered_relative_l2": 0.449702493109691,
+        "prediction_l2": 1.6840130640823425,
+        "reference_l2": 1.6832065175499549
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 0.11361143038298001,
+    "rmse": 0.1585111782870478,
+    "max_abs": 0.36801231409264,
+    "relative_l2": 0.6303724902756557,
+    "centered_rmse": 0.14781252768545566,
+    "centered_relative_l2": 0.9250384509538918
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/gpt-5.5.json",
+    "model_name": "gpt-5.5",
+    "model_alias": "gpt5p5"
+  },
+  "generation": {
+    "model_name": "gpt-5.5",
+    "model_alias": "gpt5p5",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/advection_diffusion/advection_diffusion_8",
+    "started_at_utc": "2026-10-31T07:44:19.548810+00:00",
+    "finished_at_utc": "2026-10-31T07:46:02.320837+00:00",
+    "generation_elapsed_seconds": 102.77203298099994,
+    "token_usage": {
+      "input_tokens": 15407,
+      "output_tokens": 3299,
+      "total_tokens": 18706,
+      "provider_usage": {
+        "attribution": {
+          "items": {
+            "msg_0d6f047c3f4da0eb016ae59c55208481918fba3ad358e15e3c": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 15381,
+                  "output_tokens": 0
+                }
+              ],
+              "input_tokens": 15381,
+              "output_tokens": 0
+            },
+            "msg_0d6f047c3f4da0eb016ae59c55208481919b7e1d804d1c766c": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 24,
+                  "output_tokens": 0
+                }
+              ],
+              "input_tokens": 24,
+              "output_tokens": 0
+            },
+            "msg_0d6f047c3f4da0eb016ae59ca7b77c8191b8df292ac083a339": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "content": [
+                {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 711
+                }
+              ],
+              "input_tokens": 0,
+              "output_tokens": 711
+            },
+            "rs_0d6f047c3f4da0eb016ae59c66c26481918cb21daa8b07d577": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 2,
+              "output_tokens": 516
+            },
+            "rs_0d6f047c3f4da0eb016ae59c76f8248191b1f0770646f38255": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_0d6f047c3f4da0eb016ae59c881a8c8191a75fcbe54694bca0": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_0d6f047c3f4da0eb016ae59c9835d481918f21952675e886e0": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            },
+            "rs_0d6f047c3f4da0eb016ae59ca780308191b42942eeb9769171": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0,
+              "input_tokens": 0,
+              "output_tokens": 518
+            }
+          }
+        },
+        "input_tokens": 15407,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 3299,
+        "output_tokens_details": {
+          "reasoning_tokens": 2588
+        },
+        "total_tokens": 18706
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

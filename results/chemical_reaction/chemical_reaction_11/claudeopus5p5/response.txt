@@ -1,0 +1,20 @@
+This is an ordinary physics prediction task analyzing a 2D counter-flow CH4/air diffusion flame in OpenFOAM context. I'll reason through the case physics and predict temperature at each probe.
+
+Key case parameters:
+- Domain: 0.02 m × 0.02 m, mesh 100×40, cell size 0.2 mm × 0.5 mm
+- Initial: T = 2000 K (hot N₂ ignition buffer), U = 0, p = 1 atm
+- Fuel inlet (left, x=0): pure CH₄, 293 K, U = 0.1 m/s
+- Air inlet (right, x=0.02): Y_O₂=0.23, Y_N₂=0.77, 293 K, U = −0.1 m/s
+- Outlets: top/bottom (y=±0.01), pressure outlet with 293 K backflow
+- Reaction: CH₄ + 2O₂ → CO₂ + 2H₂O, A=5.2e16, Ta=14906 K (very fast at 2000 K)
+- Strain rate ≈ 10 s⁻¹ (from inlet velocity and half-domain length)
+- Stoichiometric mixture fraction f_st ≈ 0.52 → flame near x ≈ 0.0096–0.01
+- Adiabatic flame temperature ≈ 2250 K (from JANAF data, LHV, starting at 293 K)
+
+Transient evolution:
+- t ≤ 0.05 s: Cold reactants penetrate inward (fuel front ~x=0.004, air front ~x=0.016); center retains hot N₂ ~1950 K; minimal reaction
+- t ≈ 0.1 s: Fronts near x=0.006 and x=0.014; species diffuse to center; reaction ignites; center ~2000–2050 K
+- t ≈ 0.25 s: Flame well-established; peak ~2180 K near center; profile approaching steady state
+- t ≈ 0.5 s: Near steady state; peak ~2250 K; fuel side cools faster (higher ρCp flux: 145 vs 118 W/m²/K), air side retains heat better
+
+{"case_id":"chemical_reaction_11","points":[{"x":0.002,"y":0,"z":0},{"x":0.004,"y":0,"z":0},{"x":0.006,"y":0,"z":0},{"x":0.008,"y":0,"z":0},{"x":0.01,"y":0,"z":0},{"x":0.012,"y":0,"z":0},{"x":0.014,"y":0,"z":0},{"x":0.006,"y":0.005,"z":0},{"x":0.01,"y":-0.005,"z":0}],"scalar_by_time":[{"time":0.05,"values":[500,700,1300,1800,1950,1800,1300,1250,1900]},{"time":0.1,"values":[400,600,1100,1700,2050,1700,1100,1050,2000]},{"time":0.25,"values":[520,820,1450,1950,2180,1980,1550,1380,2100]},{"time":0.5,"values":[550,900,1550,2020,2250,2050,1700,1450,2180]}]}

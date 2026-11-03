@@ -1,0 +1,184 @@
+{
+  "case": {
+    "id": "advection_diffusion_17",
+    "title": "问题 17",
+    "category": "二维瞬态对流扩散",
+    "solver": "incompressibleFluid+scalarTransport",
+    "standard_case_path": "openfoam_cases/advection_diffusion/advection_diffusion_17",
+    "difficulty": "高级",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "0.5",
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "fields": [
+      "U",
+      "p",
+      "C"
+    ],
+    "metrics": [
+      "C point-sample MAE",
+      "C point-sample RMSE",
+      "C relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/advection_diffusion/advection_diffusion_17/prompt.md",
+    "notes": "参考OpenFOAM 13 pitzDailyScalarTransport、pitzDailyPulse与blockedChannel；后向台阶、时变入口速度和时变标量边界。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/advection_diffusion/advection_diffusion_17/qwen3p8flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/advection_diffusion/advection_diffusion_17/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 0.5,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.27027084612960667,
+        "rmse": 0.2906067163916561,
+        "max_abs": 0.44205642496,
+        "relative_l2": 1.0,
+        "bias": -0.27027084612960667,
+        "centered_rmse": 0.10679856433645031,
+        "centered_relative_l2": 1.0,
+        "prediction_l2": 0.0,
+        "reference_l2": 1.125514972880906
+      }
+    },
+    {
+      "time": 1.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.2903840203744,
+        "rmse": 0.31035618255552305,
+        "max_abs": 0.421136509366,
+        "relative_l2": 0.8132341170419354,
+        "bias": -0.26965489573639995,
+        "centered_rmse": 0.15364633824412616,
+        "centered_relative_l2": 1.2037701462720927,
+        "prediction_l2": 0.7794228634059948,
+        "reference_l2": 1.4780544756314828
+      }
+    },
+    {
+      "time": 2.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.2851097461570666,
+        "rmse": 0.3088602676945095,
+        "max_abs": 0.401097909912,
+        "relative_l2": 0.8375520930679065,
+        "bias": -0.28337373425279994,
+        "centered_rmse": 0.1228576073995729,
+        "centered_relative_l2": 1.955429052872002,
+        "prediction_l2": 0.5656854249492381,
+        "reference_l2": 1.4282224150432807
+      }
+    },
+    {
+      "time": 3.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.29144432298966666,
+        "rmse": 0.3141376238464247,
+        "max_abs": 0.435830540806,
+        "relative_l2": 0.6402264066040616,
+        "bias": -0.261178247939,
+        "centered_rmse": 0.1745519106724187,
+        "centered_relative_l2": 1.0418791444525892,
+        "prediction_l2": 1.2806248474865698,
+        "reference_l2": 1.9003430240058679
+      }
+    },
+    {
+      "time": 4.0,
+      "field": "U",
+      "metrics": {
+        "cells": 15,
+        "components": 1,
+        "mae": 0.33674691357933334,
+        "rmse": 0.3738056866832554,
+        "max_abs": 0.5716357702,
+        "relative_l2": 0.9083360819116577,
+        "bias": -0.26951024340386676,
+        "centered_rmse": 0.25902687138042,
+        "centered_relative_l2": 2.3262134137946524,
+        "prediction_l2": 1.02469507659596,
+        "reference_l2": 1.5938409010407224
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 0.2947911698460146,
+    "rmse": 0.31955329543427374,
+    "max_abs": 0.4543514310488,
+    "relative_l2": 0.8398697397251123,
+    "centered_rmse": 0.1633762584065976,
+    "centered_relative_l2": 1.5054583514782671
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/advection_diffusion/advection_diffusion_17",
+    "started_at_utc": "2026-10-31T08:26:58.032349+00:00",
+    "finished_at_utc": "2026-10-31T08:29:23.849578+00:00",
+    "generation_elapsed_seconds": 145.8172483809999,
+    "token_usage": {
+      "input_tokens": 37666,
+      "output_tokens": 1209,
+      "total_tokens": 38875,
+      "provider_usage": {
+        "prompt_tokens": 37666,
+        "total_tokens": 38875,
+        "completion_tokens": 1209,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 37666
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

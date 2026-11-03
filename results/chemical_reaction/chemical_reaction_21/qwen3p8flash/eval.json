@@ -1,0 +1,146 @@
+{
+  "case": {
+    "id": "chemical_reaction_21",
+    "title": "问题 21",
+    "category": "化学反应",
+    "solver": "foamRun",
+    "standard_case_path": "openfoam_cases/chemical_reaction/chemical_reaction_21",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "0.2",
+      "0.5",
+      "1"
+    ],
+    "fields": [
+      "T.vapour"
+    ],
+    "metrics": [
+      "scalar MAE",
+      "scalar RMSE",
+      "relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/chemical_reaction/chemical_reaction_21/prompt.md",
+    "notes": "OpenFOAM 13 titaniaSynthesis prototype; only initial state varied; T.vapour (蒸气相温度, K) scored."
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/chemical_reaction/chemical_reaction_21/qwen3p8flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/chemical_reaction/chemical_reaction_21/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 0.2,
+      "field": "T.vapour",
+      "metrics": {
+        "cells": 8,
+        "components": 1,
+        "mae": 5.997692999999991,
+        "rmse": 9.817989391962481,
+        "max_abs": 25.976099999999974,
+        "relative_l2": 0.03249938355960042,
+        "bias": -5.99769299999997,
+        "centered_rmse": 7.773068530409271,
+        "centered_relative_l2": 1.0,
+        "prediction_l2": 837.2144289248723,
+        "reference_l2": 854.4613609599942
+      }
+    },
+    {
+      "time": 0.5,
+      "field": "T.vapour",
+      "metrics": {
+        "cells": 8,
+        "components": 1,
+        "mae": 197.07187362500002,
+        "rmse": 257.7022885847223,
+        "max_abs": 481.45296399999995,
+        "relative_l2": 0.4953130241008845,
+        "bias": -197.07187362500002,
+        "centered_rmse": 166.0516370522601,
+        "centered_relative_l2": 1.0,
+        "prediction_l2": 837.2144289248723,
+        "reference_l2": 1471.5787949758
+      }
+    },
+    {
+      "time": 1.0,
+      "field": "T.vapour",
+      "metrics": {
+        "cells": 8,
+        "components": 1,
+        "mae": 295.71201775,
+        "rmse": 411.3223259464256,
+        "max_abs": 819.97209,
+        "relative_l2": 0.62590583107895,
+        "bias": -295.71201775,
+        "centered_rmse": 285.902882777004,
+        "centered_relative_l2": 1.0,
+        "prediction_l2": 837.2144289248723,
+        "reference_l2": 1858.7384330883733
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 166.26052812499998,
+    "rmse": 226.28086797437012,
+    "max_abs": 442.4670513333333,
+    "relative_l2": 0.3845727462464783,
+    "centered_rmse": 153.24252945322445,
+    "centered_relative_l2": 1.0
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/qwen3.8flash.json",
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash"
+  },
+  "generation": {
+    "model_name": "qwen3.8-flash",
+    "model_alias": "qwen3p8flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/chemical_reaction/chemical_reaction_21",
+    "started_at_utc": "2026-10-31T08:31:52.010039+00:00",
+    "finished_at_utc": "2026-10-31T08:35:02.460229+00:00",
+    "generation_elapsed_seconds": 190.4502944110004,
+    "token_usage": {
+      "input_tokens": 16879,
+      "output_tokens": 608,
+      "total_tokens": 17487,
+      "provider_usage": {
+        "completion_tokens": 608,
+        "prompt_tokens": 16879,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 16879
+        },
+        "total_tokens": 17487
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

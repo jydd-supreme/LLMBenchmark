@@ -1,0 +1,185 @@
+{
+  "case": {
+    "id": "nonlinear_heat_1",
+    "title": "问题 1",
+    "category": "二维非线性瞬态导热",
+    "solver": "solid",
+    "standard_case_path": "openfoam_cases/nonlinear_heat/nonlinear_heat_1",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "50",
+      "150",
+      "300",
+      "600",
+      "1000"
+    ],
+    "fields": [
+      "T"
+    ],
+    "metrics": [
+      "temperature MAE",
+      "temperature RMSE",
+      "temperature max_abs",
+      "temperature relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/nonlinear_heat/nonlinear_heat_1/prompt.md",
+    "notes": "模型输入包含 blockMeshDict、求解配置、材料模型和 0/T；不包含派生 polyMesh、目标时间场、postProcessing 或 reference_answer.json。标准答案来自 OpenFOAM 13 polynomialSolid 数值解。"
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/nonlinear_heat/nonlinear_heat_1/deepseekv4flash/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/nonlinear_heat/nonlinear_heat_1/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 50.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 1.1189456404000082,
+        "rmse": 2.3203724963951444,
+        "max_abs": 5.181908605999979,
+        "relative_l2": 0.006582504103273663,
+        "bias": -1.1032614272000956,
+        "centered_rmse": 2.041309076372231,
+        "centered_relative_l2": 0.027764044957821,
+        "prediction_l2": 1569.7744360257623,
+        "reference_l2": 1576.4549641465587
+      }
+    },
+    {
+      "time": 150.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 2.9338613417500112,
+        "rmse": 4.345076335230823,
+        "max_abs": 8.927305203000003,
+        "relative_l2": 0.011165605736388428,
+        "bias": -2.6331792628499784,
+        "centered_rmse": 3.4563066022388202,
+        "centered_relative_l2": 0.038758852476239176,
+        "prediction_l2": 1726.8938473455744,
+        "reference_l2": 1740.324041952862
+      }
+    },
+    {
+      "time": 300.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 3.2578025393000045,
+        "rmse": 4.2131936200101014,
+        "max_abs": 7.9538109549999945,
+        "relative_l2": 0.010070456327703814,
+        "bias": -3.2578025392999734,
+        "centered_rmse": 2.671651753994945,
+        "centered_relative_l2": 0.02866475811291442,
+        "prediction_l2": 1855.1838183856607,
+        "reference_l2": 1871.0149828650522
+      }
+    },
+    {
+      "time": 600.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 3.1090547816,
+        "rmse": 3.2184639621498117,
+        "max_abs": 4.737668994999979,
+        "relative_l2": 0.007163826559230377,
+        "bias": -0.5208894932999897,
+        "centered_rmse": 3.176032810193676,
+        "centered_relative_l2": 0.034658400408365896,
+        "prediction_l2": 2004.6074428675556,
+        "reference_l2": 2009.1787937628249
+      }
+    },
+    {
+      "time": 1000.0,
+      "field": "T",
+      "metrics": {
+        "cells": 20,
+        "components": 1,
+        "mae": 1.2011866732999834,
+        "rmse": 1.476787678658646,
+        "max_abs": 3.058288002999973,
+        "relative_l2": 0.0031598722951497417,
+        "bias": 0.7467244081000217,
+        "centered_rmse": 1.2740896774504185,
+        "centered_relative_l2": 0.014175939126489198,
+        "prediction_l2": 2092.438214141579,
+        "reference_l2": 2090.0829713172707
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 2.324170195270001,
+    "rmse": 3.1147788184889054,
+    "max_abs": 5.971796352399986,
+    "relative_l2": 0.0076284530043492045,
+    "centered_rmse": 2.5238779840500185,
+    "centered_relative_l2": 0.028804399016365938
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/deepseekv4flash.json",
+    "model_name": "deepseek-v4-flash-ga-260731",
+    "model_alias": "deepseekv4flash"
+  },
+  "generation": {
+    "model_name": "deepseek-v4-flash-ga-260731",
+    "model_alias": "deepseekv4flash",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/nonlinear_heat/nonlinear_heat_1",
+    "started_at_utc": "2026-10-28T06:07:52.303897+00:00",
+    "finished_at_utc": "2026-10-28T06:17:41.562719+00:00",
+    "generation_elapsed_seconds": 589.2588207130011,
+    "token_usage": {
+      "input_tokens": 5244,
+      "output_tokens": 64790,
+      "total_tokens": 70034,
+      "provider_usage": {
+        "completion_tokens": 64790,
+        "prompt_tokens": 5244,
+        "total_tokens": 70034,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 63892
+        }
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "case": {
+    "id": "solid_mechanics_14",
+    "title": "问题 14",
+    "category": "固体力学",
+    "solver": "foamRun",
+    "standard_case_path": "openfoam_cases/solid_mechanics/solid_mechanics_14",
+    "difficulty": "进阶",
+    "input_times": [
+      "0"
+    ],
+    "target_times": [
+      "100"
+    ],
+    "fields": [
+      "D"
+    ],
+    "metrics": [
+      "scalar MAE",
+      "scalar RMSE",
+      "relative L2",
+      "JSON schema compliance"
+    ],
+    "prompt_file": "cases/solid_mechanics/solid_mechanics_14/prompt.md",
+    "notes": "Supplied OpenFOAM 13 solid_mechanics/plateHole prototype; D scored."
+  },
+  "prediction_path": "/home/ubuntu/LLMbenchmark/predictions/solid_mechanics/solid_mechanics_14/claudeopus5p5/answer.json",
+  "reference_path": "/home/ubuntu/LLMbenchmark/cases/solid_mechanics/solid_mechanics_14/reference_answer.json",
+  "metric_definitions": {
+    "notation": "Flatten all cells and components. Let prediction=p_i, reference=r_i, error=e_i=p_i-r_i, count=N, and means=p_bar/r_bar.",
+    "mae": "(1/N) * sum_i |p_i-r_i|",
+    "rmse": "sqrt((1/N) * sum_i (p_i-r_i)^2)",
+    "max_abs": "max_i |p_i-r_i|",
+    "relative_l2": "sqrt(sum_i (p_i-r_i)^2) / sqrt(sum_i r_i^2)",
+    "bias": "p_bar-r_bar",
+    "centered_rmse": "sqrt((1/N) * sum_i (((p_i-p_bar)-(r_i-r_bar))^2))",
+    "centered_relative_l2": "sqrt(sum_i (((p_i-p_bar)-(r_i-r_bar))^2)) / sqrt(sum_i (r_i-r_bar)^2)",
+    "prediction_l2": "sqrt(sum_i p_i^2)",
+    "reference_l2": "sqrt(sum_i r_i^2)",
+    "alpha_boundedness_violation_fraction": "count_i(p_i < -1e-9 or p_i > 1+1e-9) / N",
+    "alpha_liquid_volume_abs_error": "|sum_i p_i - sum_i r_i| (cell-count sum; not cell-volume weighted)",
+    "alpha_liquid_volume_relative_error": "|sum_i p_i - sum_i r_i| / |sum_i r_i|",
+    "alpha_interface_cell_count_error": "|count_i(1e-6 < p_i < 1-1e-6) - count_i(1e-6 < r_i < 1-1e-6)|",
+    "aggregate": "Arithmetic mean across all successfully evaluated time-field pairs."
+  },
+  "schema_compliance": true,
+  "schema_errors": [],
+  "field_results": [
+    {
+      "time": 100.0,
+      "field": "D",
+      "metrics": {
+        "cells": 8,
+        "components": 1,
+        "mae": 9.303347025775001e-09,
+        "rmse": 1.0979566643019265e-08,
+        "max_abs": 1.992352423399998e-08,
+        "relative_l2": 0.1230340852612362,
+        "bias": -5.9296799369499955e-09,
+        "centered_rmse": 9.240659041098423e-09,
+        "centered_relative_l2": 0.24572644299047847,
+        "prediction_l2": 2.3223264197782363e-07,
+        "reference_l2": 2.524089486676461e-07
+      }
+    }
+  ],
+  "aggregate": {
+    "mae": 9.303347025775001e-09,
+    "rmse": 1.0979566643019265e-08,
+    "max_abs": 1.992352423399998e-08,
+    "relative_l2": 0.1230340852612362,
+    "centered_rmse": 9.240659041098423e-09,
+    "centered_relative_l2": 0.24572644299047847
+  },
+  "model": {
+    "config": "/home/ubuntu/LLMbenchmark/config/models/claude-opus-5.5.json",
+    "model_name": "claude-opus-5-5",
+    "model_alias": "claudeopus5p5"
+  },
+  "generation": {
+    "model_name": "claude-opus-5-5",
+    "model_alias": "claudeopus5p5",
+    "input_package": "/home/ubuntu/LLMbenchmark/datasets/solid_mechanics/solid_mechanics_14",
+    "started_at_utc": "2026-10-30T05:21:49.368187+00:00",
+    "finished_at_utc": "2026-10-30T05:22:37.374585+00:00",
+    "generation_elapsed_seconds": 48.006401138,
+    "token_usage": {
+      "input_tokens": 20604,
+      "output_tokens": 166,
+      "total_tokens": 20770,
+      "provider_usage": {
+        "prompt_tokens": 20604,
+        "completion_tokens": 166,
+        "total_tokens": 20770,
+        "prompt_tokens_details": {
+          "cached_tokens": 16689,
+          "cache_write_tokens": 2885,
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "image_tokens": 0
+        },
+        "completion_tokens_details": {
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "claude_cache_creation_5_m_tokens": 2885
+      }
+    },
+    "token_usage_source": "provider_api",
+    "required_files": [
+      "answer.json"
+    ],
+    "written_files": [
+      "answer.json"
+    ],
+    "all_required_files_generated": true
+  }
+}
