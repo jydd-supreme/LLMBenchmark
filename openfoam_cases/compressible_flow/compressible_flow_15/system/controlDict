@@ -1,0 +1,75 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  13
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solver          shockFluid;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         0.0008;
+
+deltaT          1e-7;
+
+writeControl    adjustableRunTime;
+
+writeInterval   0.0002;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  12;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+functions
+{
+
+benchmarkProbes
+{
+    type                probes;
+    libs                (sampling);
+    writeControl        writeTime;
+    interpolationScheme cellPoint;
+    fields              (rho U p T);
+    probeLocations
+    (
+            (0.01 0 0.002)
+            (0.01 0 0.055)
+            (0.05 0 0.002)
+            (0.05 0 0.055)
+            (0.12 0 0.002)
+            (0.12 0 0.045)
+            (0.2 0 0.002)
+            (0.2 0 0.04)
+            (0.3 0 0.002)
+            (0.3 0 0.03)
+            (0.42 0 0.002)
+            (0.42 0 0.025)
+    );
+}
+}
+
+// ************************************************************************* //

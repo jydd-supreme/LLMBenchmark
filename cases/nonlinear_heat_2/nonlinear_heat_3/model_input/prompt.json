@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "case_id": "nonlinear_heat_2_3",
+  "title": "问题 3",
+  "prompt": "# 问题 3\n\n一块完整的矩形薄板连接左侧热边界与右侧冷边界，热量可穿过板内多个水平位置；不同探针到两端的距离决定初期升温先后。左侧边界较热、右侧边界较冷，板内起初温度均匀。热量沿实际相连的板材传播，同时导热能力随局部温度变化；不同探针到冷热边界的路径和所处位置不同，响应先后需要结合实际构型判断。\n\n本题给出同一物理系统在 `t=0、10、20、30、40 s` 的连续温度场。请读取：\n\n- `case_context/system/blockMeshDict`：几何、网格和边界 patch；\n- `case_context/constant/physicalProperties`：密度、定容比热和温度相关导热率；\n- `case_context/system/fvSchemes` 与 `fvSolution`：离散和线性求解设置；\n- `case_context/system/controlDict`：探针位置；\n- `inputs/0/T`、`inputs/10/T`、`inputs/20/T`、`inputs/30/T`、`inputs/40/T`：按时间排列的温度观测场。\n\n以下为该问题的一种控制方程写法。请结合给定的物性、边界条件和历史温度场判断它是否适用。\n\n\\[\n\\rho C_v\\frac{\\partial T}{\\partial t}-k(T)\\nabla^2T=0\n\\]\n\n其中 `T` 的单位为 K，`ρ`、`Cv` 和 `k(T)` 的数值均见 `physicalProperties`。本题无内热源，忽略流动、辐射、相变和接触热阻。\n\n请判断上式与给定问题是否一致，并预测后续探针温度。\n\n`error_type` 只能取以下值之一：\n\n```text\nnone\nwrong_diffusion_sign\nmissing_nonlinear_gradient_term\nconstant_k_assumption\nwrong_thermal_inertia\nfirst_order_spatial_operator\nthird_order_incomplete_model\n```\n\n不得调用 OpenFOAM 或其他数值求解器，也不得读取标准答案。请预测 `t=[50,150,300,600,1000] s` 时 `controlDict` 中全部 `probeLocations` 的温度。\n\n只返回合法 JSON，不得输出解释、Markdown 或额外字段：\n\n```json\n{\"case_id\":\"nonlinear_heat_2_3\",\"equation_assessment\":{\"consistent\":null,\"error_type\":null},\"points\":[{\"x\":0,\"y\":0}],\"temperature_by_time\":[{\"time\":50,\"values\":[0]}]}\n```\n\n- `consistent` 必须是布尔值；方程一致时 `error_type` 必须为 `none`；\n- `points` 按 `probeLocations` 原顺序抄录 `x、y`，忽略薄板厚度方向的 `z`；\n- `temperature_by_time` 依次包含 `50、150、300、600、1000 s`；\n- 每个 `values` 与 `points` 一一对应，温度尽量保留至少 8 位有效数字。",
+  "input_times": [
+    "0",
+    "10",
+    "20",
+    "30",
+    "40"
+  ],
+  "target_times": [
+    "50",
+    "150",
+    "300",
+    "600",
+    "1000"
+  ],
+  "fields": [
+    "T"
+  ],
+  "input_files": [
+    "0/T",
+    "10/T",
+    "20/T",
+    "30/T",
+    "40/T"
+  ],
+  "context_files": [
+    "constant/physicalProperties",
+    "system/blockMeshDict",
+    "system/controlDict",
+    "system/fvSchemes",
+    "system/fvSolution"
+  ],
+  "output_contract": {
+    "format": "json_temperature_samples",
+    "required_files": [
+      "answer.json"
+    ],
+    "schema": {
+      "case_id": "string",
+      "equation_assessment": {
+        "consistent": "boolean",
+        "error_type": "string"
+      },
+      "points": [
+        {
+          "x": "number",
+          "y": "number"
+        }
+      ],
+      "temperature_by_time": [
+        {
+          "time": "number",
+          "values": [
+            "number"
+          ]
+        }
+      ]
+    },
+    "rule": "Preserve probe order and target-time order. Assess equation consistency and predict temperature."
+  }
+}

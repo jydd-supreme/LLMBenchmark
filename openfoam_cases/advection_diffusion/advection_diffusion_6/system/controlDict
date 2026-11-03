@@ -1,0 +1,67 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| OpenFOAM: The Open Source CFD Toolbox, Version 13                         |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+
+solver          incompressibleFluid;
+startFrom       startTime;
+startTime       0;
+stopAt          endTime;
+endTime         4;
+deltaT          0.005;
+writeControl    runTime;
+writeInterval   0.5;
+purgeWrite      0;
+writeFormat     ascii;
+writePrecision  12;
+writeCompression off;
+timeFormat      general;
+timePrecision   8;
+runTimeModifiable false;
+adjustTimeStep  no;
+
+functions
+{
+    scalarEvolution
+    {
+        type scalarTransport;
+        libs ("libsolverFunctionObjects.so");
+        field C;
+        diffusivity constant;
+        D 0.00035;
+        nCorrectors 1;
+    }
+    probes
+    {
+        type probes;
+        libs ("libsampling.so");
+        writeControl writeTime;
+        fields (C);
+        fixedLocations true;
+        interpolationScheme cellPoint;
+        probeLocations
+        (
+            (0.0225 0.0725 0.005)
+            (0.0425 0.0725 0.005)
+            (0.0325 0.0925 0.005)
+            (0.365 0.0225 0.005)
+            (0.505 0.0375 0.005)
+            (0.935 0.0875 0.005)
+            (0.405 0.0025 0.005)
+            (0.355 0.0375 0.005)
+            (0.905 0.0975 0.005)
+            (0.935 0.0125 0.005)
+            (0.615 0.0875 0.005)
+            (0.655 0.0775 0.005)
+            (0.695 0.0825 0.005)
+            (0.885 0.0275 0.005)
+            (0.465 0.0725 0.005)
+        );
+    }
+}
